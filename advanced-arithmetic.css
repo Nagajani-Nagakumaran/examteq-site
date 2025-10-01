@@ -1,0 +1,82 @@
+/* Base */
+* { box-sizing: border-box; }
+:root{
+  --bg:#0b1324; --card:#0f1a33; --ink:#eaf0ff;
+  --accent:#35b7ff; --muted:#9fb3ff; --edge:#e7ecf3;
+  --good:#16a34a; --bad:#dc2626; --warn:#eab308;
+  --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.18);
+}
+html,body{ margin:0; font-family: Inter, system-ui, Arial, sans-serif; background:#f7f9fe; color:#0b1324; }
+.wrap{ max-width:1000px; margin:0 auto; padding:1.25rem; }
+
+.hdr{ background:linear-gradient(90deg,#0b1324,#0f1a33); color:var(--ink); }
+.hdr h1{ margin:0 0 .35rem; font-size:clamp(1.6rem,3.5vw,2.2rem); }
+.hdr p{ margin:.25rem 0 0; color:#cfe3ff; }
+
+.panel{ background:#fff; border:1px solid var(--edge); border-radius:var(--radius); box-shadow:var(--shadow); padding:1rem; margin:1rem 0; }
+.row{ display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; margin:.5rem 0; }
+.lbl{ width:160px; font-weight:600; color:#334155; }
+.input{ flex:1; min-width:220px; padding:.6rem .75rem; border:1px solid var(--edge); border-radius:12px; background:#fff; }
+.btn{ appearance:none; border:none; background:var(--accent); color:#00233f; font-weight:700; padding:.7rem 1rem; border-radius:12px; cursor:pointer; }
+.btn:hover{ filter:brightness(.95); }
+.btn-ghost{ background:#eaf4ff; }
+.timer{ font-weight:800; color:#0b1324; margin-top:.5rem; }
+
+.q-list{ list-style:decimal; padding-left:1.5rem; display:grid; gap:.75rem; }
+.q{ display:grid; grid-template-columns: 1fr auto; gap:.75rem; align-items:center; padding:.75rem; border:1px solid var(--edge); border-radius:12px; background:#fbfdff; }
+.q .expr{ font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight:700; }
+.q input{ width:120px; text-align:center; padding:.5rem; border:1px solid var(--edge); border-radius:10px; }
+.actions{ display:flex; gap:.75rem; margin-top:1rem; }
+
+.pass{ color:var(--good); font-weight:700; }
+
+/* Certificate */
+.certificate{ display:flex; flex-direction:column; align-items:center; gap:1rem; margin:1rem 0; }
+.cert-actions{ display:flex; gap:.75rem; }
+
+/* Utility */
+.hidden{ display:none !important; }
+
+/* Remove number input arrows (Chrome, Edge, Safari) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+/* Remove number input arrows (Firefox) */
+input[type="number"] { -moz-appearance: textfield; }
+
+/* MCQ layout */
+.q .opts { display: grid; gap:.35rem; grid-column: 1 / -1; }
+.q .opts label { display:flex; align-items:center; gap:.5rem; cursor:pointer; }
+.q.correct { border-color:#16a34a; background:#f0fff4; }
+.q.wrong   { border-color:#dc2626; background:#fff5f5; }
+.q .ans { font-size:.9rem; color:#334155; grid-column: 1 / -1; display:none; }
+.q .ans b { font-weight:800; }
+.q .tag { font-weight:700; }
+
+/* === feedback === */
+.q.correct { border-color: #16a34a; background: #f0fff4; }
+.q.wrong   { border-color: #dc2626; background: #fff5f5; }
+.q .ans { font-size:.9rem; color:#334155; }
+.q .ans b { font-weight:800; }
+.q .tag { font-weight:700; }
+
+/* Letter badges for A–E */
+.opt-badge{
+  display:inline-grid;
+  place-items:center;
+  width:1.6rem; height:1.6rem;
+  border:1px solid var(--edge);
+  border-radius:999px;
+  font-weight:800; font-size:.9rem;
+  background:#fff;
+}
+.q .opts label input{ transform: translateY(1px); }
+
+/* Print: A4 landscape, only the certificate SVG prints; no blank second page */
+@media print{
+  @page { size: A4 landscape; margin: 0; }
+  body{ background:#fff; }
+  .no-print{ display:none !important; }
+  .certificate{ margin:0; }
+  #certificate{ display:block !important; height:100vh; }
+  #certSvg{ width:100vw; height:100vh; }
+}

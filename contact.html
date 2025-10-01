@@ -5,33 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Contact ExamTeq – Send us a message or visit our centre." />
   <title>Contact Us | ExamTeq</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- must match index -->
+  <link rel="stylesheet" href="/styles.css" />
+
+  <!-- Page-only styles: SCOPE THEM -->
+  <style>
+    /* Only affect containers inside the contact page’s main content,
+       not the header/footer which also use .container */
+    .contact-page .page-container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+    .contact-hero { text-align: center; padding: 2.5rem 1rem 1rem; }
+    .contact-hero h1 { font-size: clamp(2rem, 3.5vw, 2.75rem); margin-bottom: .5rem; }
+    .contact-wrap { display: grid; gap: 2rem; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 800px){ .contact-wrap { grid-template-columns: 1fr; } }
+    .card { background: #fff; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.06); padding: 1.5rem; }
+    form label { display:block; margin-top:1rem; font-weight:600; }
+    form input, form textarea { width:100%; padding:.85rem 1rem; border:1px solid #d8dce3; border-radius:10px; background:#fafbfc; }
+    .map-info iframe { border-radius: 12px; margin-top: .75rem; }
+    .muted { font-size:.9rem; opacity:.8; }
+  </style>
 </head>
-<body>
+
+<!-- add a page class -->
+<body class="contact-page">
+  <!-- HEADER / NAV (identical to index) -->
   <header>
-    <nav class="navbar">
-      <div class="logo">ExamTeq</div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="book.html">Book</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="mock-exams.html">Mock Exams</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="testimonials.html">Testimonials</a></li>
-        <li><a href="resources.html">Free Resources</a></li>
-        <li><a href="login.html" class="nav-link">Member Login</a></li>
-        <li><a href="book.html" class="cta-button">Book a Trial</a></li>
+    <nav class="navbar container" aria-label="Primary">
+      <a class="logo" href="/index.html" aria-label="ExamTeq Home">
+        <img src="/logo.png" alt="ExamTeq logo" width="44" height="44" />
+        <span>ExamTeq</span>
+      </a>
+
+      <button class="hamburger" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">☰</button>
+
+      <ul class="nav-links" id="navLinks" role="menu">
+        <li role="none"><a role="menuitem" class="nav-link" href="/index.html">Home</a></li>
+        <li role="none"><a role="menuitem" class="nav-link" href="/mock-exams.html">Paper Class</a></li>
+
+        <li class="has-submenu" role="none">
+          <a role="menuitem" class="nav-link has-popup" href="/resources.html" aria-haspopup="true" aria-expanded="false">Resources</a>
+          <ul class="submenu" role="menu" aria-label="Resources submenu">
+            <li role="none"><a role="menuitem" href="/resources.html#videos">Online Lessons</a></li>
+            <li role="none"><a role="menuitem" href="/resources.html#downloads">Topic Tests</a></li>
+            <li role="none"><a role="menuitem" href="/timestable.html">Times Tables Practice</a></li>
+            <li role="none"><a role="menuitem" href="/advanced-arithmetic.html">Advanced Arithmetic Practice</a></li>
+          </ul>
+        </li>
+
+        <li role="none"><a role="menuitem" class="nav-link" href="/contact.html" aria-current="page">Contact</a></li>
+        <li role="none"><a role="menuitem" class="nav-link" href="/login.html">Login</a></li>
+        <li role="none"><a role="menuitem" class="cta-button nav-cta" href="/book.html">Book a Session</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="form-section">
-    <h1>Contact ExamTeq</h1>
-    <p>Send us your questions or feedback, or come visit our centre.</p>
+  <!-- Hero -->
+  <section class="contact-hero page-container">
+    <h1>Get in Touch with ExamTeq</h1>
+    <p>We’d love to hear from you. Send a quick message or find us at our centre.</p>
+  </section>
 
-    <div class="contact-container">
-      <form name="contact" method="POST" data-netlify="true" action="thankyou.html">
+  <!-- Content -->
+  <main class="page-container contact-wrap">
+    <!-- Left: Form -->
+    <section class="card">
+      <h3>Send a Message</h3>
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="thankyou.html">
         <input type="hidden" name="form-name" value="contact" />
+        <p style="display:none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
 
         <label for="name">Your Name</label>
         <input type="text" id="name" name="name" required />
@@ -39,24 +80,116 @@
         <label for="email">Email Address</label>
         <input type="email" id="email" name="email" required />
 
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="+44 7xxx xxx xxx" />
+
         <label for="message">Your Message</label>
         <textarea id="message" name="message" rows="5" required></textarea>
 
-        <button type="submit" class="cta-button">Send Message</button>
-      </form>
+        <label style="display:flex; gap:.6rem; align-items:flex-start; margin-top:1rem;">
+          <input type="checkbox" name="consent" required />
+          <span>I agree to be contacted regarding my enquiry. <a href="privacy.html">Privacy Policy</a></span>
+        </label>
 
-      <div class="map-info">
-        <h3>Visit Us</h3>
-        <p>ExamTeq, London, UK</p>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19805.675948234165!2d-0.1277588!3d51.5073506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b333b3e9c35%3A0xf5c3b32c4bdf7e!2sLondon!5e0!3m2!1sen!2suk!4v1622195390547!5m2!1sen!2suk"
-          width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-      </div>
-    </div>
+        <button type="submit" class="cta-button" style="margin-top:1rem;">Send Message</button>
+        <p class="muted">We typically respond within 1 working day.</p>
+      </form>
+    </section>
+
+    <!-- Right: Info -->
+    <aside class="card map-info">
+      <h3>Visit Us</h3>
+      <p>Our tuition centre is located in South West London, UK.<br/>After contacting us and receiving a place in our tuition class, we will send the specific location details.</p>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19805.675948234165!2d-0.1277588!3d51.5073506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b333b3e9c35%3A0xf5c3b32c4bdf7e!2sLondon!5e0!3m2!1sen!2suk!4v1622195390547!5m2!1sen!2suk"
+        width="100%" height="250" style="border:0;" allowfullscreen loading="lazy"></iframe>
+      <h4>Contact Details</h4>
+      <p>Email: <a href="mailto:info@examteq.com">info@examteq.com</a><br/>Phone: 07404585113<br/>WhatsApp: +447404585113</p>
+    </aside>
   </main>
 
-  <footer>
-    <p>&copy; 2025 ExamTeq. All rights reserved.</p>
+ <!-- FOOTER (same site footer pattern) -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <a class="footer-logo" href="/index.html" aria-label="ExamTeq Home"><span>ExamTeq</span></a>
+        <p class="footer-blurb">Premium tutoring since 2014 — structured English, Maths, and 11+ preparation with clear feedback and steady progress.</p>
+        <div class="footer-social">
+          <a class="ig" href="https://www.instagram.com/examteq" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.35 3.608 1.325.975.975 1.262 2.242 1.324 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.35 2.633-1.325 3.608-.975.975-2.242 1.262-3.608 1.324-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.35-3.608-1.325-.975-.975-1.262-2.242-1.324-3.608C2.175 15.747 2.163 15.367 2.163 12s.012-3.584.07-4.85c.062-1.366.35-2.633 1.325-3.608C4.533 2.567 5.8 2.28 7.166 2.218 8.432 2.16 8.812 2.163 12 2.163zm0 3.675a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm7.2-1.358a1.44 1.44 0 1 0 0 2.882 1.44 1.44 0 0 0 0-2.882z"/></svg>
+          </a>
+          <a class="yt" href="https://www.youtube.com/@ExamTeq" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.001 3.001 0 0 0-2.112-2.12C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.386.566a3 3 0 0 0-2.112 2.12C0 8.083 0 12 0 12s0 3.917 .502 5.814a3 3 0 0 0 2.112 2.12C4.5 20.5 12 20.5 12 20.5s7.5 0 9.386-.566a3 3 0 0 0 2.112-2.12C24 15.917 24 12 24 12s0-3.917-.502-5.814zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          </a>
+          <a class="fb" href="https://www.facebook.com/examteq" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.675 0h-21.35C.596 0 0 .596 0 1.326v21.348C0 23.404.596 24 1.326 24h11.495v-9.294H9.691V11.41h3.13V8.708c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.764v2.314h3.587l-.467 3.296h-3.12V24h6.116C23.404 24 24 23.404 24 22.674V1.326C24 .596 23.404 0 22.675 0z"/></svg>
+          </a>
+          <a class="wa" href="https://wa.me/447404585113" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12.04 2a9.96 9.96 0 0 0-8.51 15.2L2 22l4.93-1.47A9.96 9.96 0 1 0 12.04 2zm5.88 15.03c-.24.69-1.2 1.27-1.98 1.44-.53.11-1.22.2-3.56-.74-2.99-1.24-4.92-4.29-5.07-4.49-.15-.2-1.21-1.61-1.21-3.07 0-1.46.77-2.17 1.04-2.47.24-.27.64-.39 1.03-.39.12 0 .23 0 .33.01.29.01.44.03.63.49.24.58.83 2 .9 2.15.07.15.12.32.02.52-.1.2-.15.31-.3.48-.15.17-.31.39-.44.53-.14.14-.28.3-.12.58.15.27.66 1.08 1.41 1.75.97.86 1.79 1.13 2.06 1.26.27.13.43.11.59-.06.16-.17.68-.79.86-1.06.18-.27.36-.22.61-.13.25.09 1.6.75 1.88.88.28.13.46.2.53.31.07.12.07.69-.17 1.38z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <nav class="footer-col footer-links" aria-label="Footer">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/book.html">Book a Trial</a></li>
+          <li><a href="/mock-exams.html">Mock Exams</a></li>
+          <li><a href="/resources.html">Resources</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h3>Contact</h3>
+        <ul class="contact-list">
+          <li><strong>Email:</strong> <a href="mailto:info@examteq.com">info@examteq.com</a></li>
+          <li><strong>WhatsApp:</strong> <a href="tel:+447404585113">+44 7404 585113</a></li>
+          <li><strong>Company number:</strong> 07404585113</li>
+          <li><strong>Location:</strong> London, United Kingdom</li>
+        </ul>
+        <div class="footer-legal-links">
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/cookies.html">Cookies</a>
+          <a href="/safeguarding.html">Safeguarding</a>
+        </div>
+      </div>
+    </div>
   </footer>
+
+  <!-- Same nav JS as index -->
+  <script>
+    (function(){
+      const nav = document.getElementById('navLinks');
+      const ham = document.querySelector('.hamburger');
+      if (ham && nav) {
+        ham.addEventListener('click', () => {
+          const open = nav.classList.toggle('active');
+          ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+      document.querySelectorAll('#navLinks a').forEach(a => {
+        a.addEventListener('click', () => {
+          if (nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            ham && ham.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+      document.querySelectorAll('.has-submenu > .has-popup').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const isDesktop = window.matchMedia('(min-width: 861px)').matches;
+          if (isDesktop) return;
+          e.preventDefault();
+          const li = link.parentElement;
+          const open = li.classList.toggle('open');
+          link.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

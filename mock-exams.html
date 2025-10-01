@@ -3,93 +3,337 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="View and book upcoming mock exams. 11+, KS2 and GCSE-style practice." />
-  <title>Mock Exams | ExamTeq</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="ExamTeq Year 5 11+ Paper Class – 2-hour sessions covering Maths, English, and Creative Writing. Limited places: book early or join the waiting list." />
+  <title>Year 5 Paper Class | ExamTeq</title>
+
+  <!-- must match index/contact -->
+  <link rel="stylesheet" href="/styles.css" />
+
+  <!-- Page-only styles: SCOPE THEM so the header/footer aren't touched -->
+  <style>
+    :root { --etq-max: 1100px; }
+    .mock-page .page-container { max-width: var(--etq-max); margin: 0 auto; padding: 2rem 1rem; }
+    .page-hero { text-align: center; padding: 2.5rem 1rem 1.25rem; }
+    .page-hero h1 { font-size: clamp(2rem, 3.6vw, 3rem); margin: 0 0 .6rem; }
+    .muted { opacity: .9; }
+
+    .keyline { margin: 1rem auto 0; width: 72px; height: 4px; border-radius: 8px; background: var(--primary, #0b1e44); }
+
+    /* Info strip */
+    .pillbar{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:.9rem 0 0}
+    .pill{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .7rem;border:1px solid #e7ebf2;background:#f8fbff;border-radius:999px;font-size:.92rem}
+
+    /* Two-up cards */
+    .grid{display:grid;gap:1rem;grid-template-columns:repeat(2,1fr)}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    .card{background:#fff;border-radius:14px;box-shadow:0 10px 28px rgba(0,0,0,.06);padding:1.1rem}
+    .card h3{margin:.1rem 0 .5rem}
+    .card p{margin:.4rem 0}
+    .list{margin:.5rem 0 .2rem;padding-left:1.2rem}
+    .list li{margin:.25rem 0}
+
+    /* Week planner */
+    .week-grid{display:grid;gap:1rem;grid-template-columns:repeat(4,1fr);margin-top:.75rem}
+    @media (max-width:1000px){.week-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.week-grid{grid-template-columns:1fr}}
+    .week{background:#ffffff;border:1px solid #f8faff;border-radius:14px;padding:1rem}
+    .week h4{margin:.1rem 0 .35rem}
+    .tag{display:inline-block;background:#f1f6ff;border:1px solid #e6eefc;padding:.18rem .55rem;border-radius:999px;font-size:.85rem;margin-right:.35rem;margin-bottom:.35rem}
+
+    /* Session chooser */
+    .sessions{display:grid;gap:1rem;grid-template-columns:repeat(4,1fr);margin-top:.5rem}
+    @media (max-width:1000px){.sessions{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.sessions{grid-template-columns:1fr}}
+    .session{background:#4faed6; color:#eaf0ff; border-radius:14px; padding:1rem}
+    .session h4{margin:0 0 .2rem}
+    .session p{margin:.25rem 0 .75rem}
+    .actions{display:flex;gap:.5rem;flex-wrap:wrap}
+    .btn{display:inline-block;text-decoration:none;padding:.6rem .9rem;border-radius:10px;font-weight:600}
+    .btn-primary{background:var(--primary, #2255c3);color:#fff}
+    .btn-light{background:#eef6ff;color:#0b1e44}
+    .btn-outline{background:transparent;border:1px solid #9fb3ff;color:#eaf0ff}
+
+    /* Notices */
+    .notice{background:#fff8e6;border:1px solid #ffe0a6;color:#5b3d00;border-radius:12px;padding:.9rem 1rem;margin:1rem 0}
+    .success{background:#f2fff7;border:1px solid #c7f1d8;color:#0c4b2a}
+    .danger{background:#fff2f2;border:1px solid #ffd1d1;color:#6d1a1a}
+
+    footer .page-container a { text-decoration: none; }
+  </style>
 </head>
-<body>
+
+<body class="mock-page">
+  <!-- HEADER / NAV (identical to index/contact) -->
   <header>
-    <nav class="navbar">
-      <div class="logo">ExamTeq</div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="book.html">Book</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="mock-exams.html">Mock Exams</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="testimonials.html">Testimonials</a></li>
-        <li><a href="resources.html">Free Resources</a></li>
-        <li><a href="login.html" class="nav-link">Member Login</a></li>
-        <li><a href="book.html" class="cta-button">Book a Trial</a></li>
+    <nav class="navbar container" aria-label="Primary">
+      <a class="logo" href="/index.html" aria-label="ExamTeq Home">
+        <img src="/logo.png" alt="ExamTeq logo" width="44" height="44" />
+        <span>ExamTeq</span>
+      </a>
+
+      <button class="hamburger" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">☰</button>
+
+      <ul class="nav-links" id="navLinks" role="menu">
+        <li role="none"><a role="menuitem" class="nav-link" href="/index.html">Home</a></li>
+        <li role="none"><a role="menuitem" class="nav-link" href="/mock-exams.html" aria-current="page">Paper Class</a></li>
+
+        <li class="has-submenu" role="none">
+          <a role="menuitem" class="nav-link has-popup" href="/resources.html" aria-haspopup="true" aria-expanded="false">Resources</a>
+          <ul class="submenu" role="menu" aria-label="Resources submenu">
+            <li role="none"><a role="menuitem" href="/resources.html#videos">Online Lessons</a></li>
+            <li role="none"><a role="menuitem" href="/resources.html#downloads">Topic Tests</a></li>
+            <li role="none"><a role="menuitem" href="/timestable.html">Times Tables Practice</a></li>
+            <li role="none"><a role="menuitem" href="/advanced-arithmetic.html">Advanced Arithmetic Practice</a></li>
+          </ul>
+        </li>
+
+        <li role="none"><a role="menuitem" class="nav-link" href="/contact.html">Contact</a></li>
+        <li role="none"><a role="menuitem" class="nav-link" href="/login.html">Login</a></li>
+        <li role="none"><a role="menuitem" class="cta-button nav-cta" href="/book.html">Book a Session</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="form-section">
-    <h1>Upcoming Mock Exams</h1>
-    <p>Test your knowledge under exam conditions. Our mock exams simulate real papers and include detailed feedback.</p>
-
-    <div class="service-grid" style="margin-top: 2rem;">
-      <div class="service-card">
-        <h3>11+ Mock Paper A</h3>
-        <ul>
-          <li>Subject: English & Verbal Reasoning</li>
-          <li>Date: August 3, 2025</li>
-          <li>Format: Timed | Online & Centre</li>
-        </ul>
-        <a href="book.html" class="cta-button">Book</a>
-      </div>
-
-      <div class="service-card">
-        <h3>11+ Mock Paper B</h3>
-        <ul>
-          <li>Subject: Maths & Non-Verbal Reasoning</li>
-          <li>Date: August 17, 2025</li>
-          <li>Location: Online Only</li>
-        </ul>
-        <a href="book.html" class="cta-button">Book</a>
-      </div>
-
-      <div class="service-card">
-        <h3>KS2 English Diagnostic</h3>
-        <ul>
-          <li>Year 4–6 students</li>
-          <li>PDF + online submission</li>
-          <li>Marked with feedback</li>
-        </ul>
-        <a href="book.html" class="cta-button">Book</a>
-      </div>
+  <!-- Hero -->
+  <section class="page-hero page-container">
+    <h1>Year 5 11+ Paper Class</h1>
+    <p class="muted">A structured, 2-hour class covering <strong>Maths</strong>, <strong>English</strong> and <strong>Creative Writing</strong>. Places are limited—book early to secure a seat.</p>
+    <div class="keyline" aria-hidden="true"></div>
+    <div class="pillbar" aria-hidden="true">
+      <span class="pill">Year 5 (11+ prep)</span>
+      <span class="pill">2 hours per class</span>
+      <span class="pill">Maths • English • Creative Writing</span>
+      <span class="pill">Small groups • In-centre</span>
     </div>
+    <div class="notice"><strong>Availability:</strong> Saturday, Monday, Wednesday, and Friday <strong>5–7pm</strong>. If a class is full, you can <em>join the waiting list</em> below.</div>
+  </section>
+
+  <main class="page-container">
+    <!-- Structure & syllabus -->
+    <section class="grid" aria-label="Class structure">
+      <article class="card">
+        <h3>What’s Included (Every Class)</h3>
+        <ul class="list">
+          <li><strong>Maths:</strong> Weekly numeracy assessment + targeted teaching.</li>
+          <li><strong>English:</strong> Comprehension, grammar, spelling, vocabulary, punctuation, cloze.</li>
+          <li><strong>Creative Writing:</strong> Technique mini-lesson + in-class essay writing.</li>
+          <li><strong>Feedback:</strong> Individual pointers on strengths and next steps.</li>
+        </ul>
+        <p class="muted">Answers to the <em>harder Maths questions</em> are explained in an online video on our YouTube channel.</p>
+      </article>
+
+      <article class="card">
+        <h3>Maths Testing Format</h3>
+        <p><strong>Stage 1 — Foundation Decimal Topic Test (MCQ):</strong> warm-up multiple choice to consolidate fundamentals.</p>
+        <p><strong>Stage 2 — Advanced Topic Test (Standard format):</strong> written solutions required; workings and reasoning emphasised.</p>
+        <div class="notice success">Weeks 1–2: <strong>Decimals</strong> • Weeks 3–4: <strong>Fractions</strong></div>
+      </article>
+    </section>
+
+    <!-- 4-week plan -->
+    <section style="margin-top:1.25rem" aria-label="4-week plan">
+      <h2 style="margin-bottom:.25rem">4-Week Teaching Plan</h2>
+      <p class="muted" style="margin:.25rem 0 .75rem">Clear goals each week to build mastery and exam confidence.</p>
+      <div class="week-grid">
+        <div class="week">
+          <h4>Week 1</h4>
+          <span class="tag">Maths: Decimals</span>
+          <span class="tag">English: Core skills</span>
+          <span class="tag">Writing: Diary Entry</span>
+          <p class="muted">Stage 1 MCQ + Stage 2 written. Writing focus: voice, tense control, structure.</p>
+        </div>
+        <div class="week">
+          <h4>Week 2</h4>
+          <span class="tag">Maths: Decimals</span>
+          <span class="tag">English: Comprehension</span>
+          <span class="tag">Writing: Diary Entry</span>
+          <p class="muted">Fluency and problem solving with decimals; deeper inference in comprehension.</p>
+        </div>
+        <div class="week">
+          <h4>Week 3</h4>
+          <span class="tag">Maths: Fractions</span>
+          <span class="tag">English: Grammar & Cloze</span>
+          <span class="tag">Writing: Informal Letter</span>
+          <p class="muted">Methods for equivalence, addition/subtraction; accurate sentence craft.</p>
+        </div>
+        <div class="week">
+          <h4>Week 4</h4>
+          <span class="tag">Maths: Fractions</span>
+          <span class="tag">English: Spelling & Vocabulary</span>
+          <span class="tag">Writing: Informal Letter</span>
+          <p class="muted">Mixed fraction problems; precise word choice and cohesive letter structure.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Session selection -->
+    <section style="margin-top:1.5rem" aria-label="Choose a session">
+      <h2 style="margin-bottom:.25rem">Choose Your Weekly Slot</h2>
+      <p class="muted" style="margin:.25rem 0 .9rem">All sessions run <strong>5–7pm</strong>. If your preferred slot is full, join the waiting list and we’ll contact you as places open.</p>
+      <div class="sessions">
+        <div class="session" data-day="Saturday" data-status="open">
+          <h4>Saturday • 5–7pm</h4>
+          <p class="muted">In-centre • Year 5 • 11+ Paper Class</p>
+          <div class="actions">
+            <a class="btn btn-light" href="/book.html?class=Year%205%20Paper%20Class&day=Saturday&time=17%3A00-19%3A00">Book Now</a>
+            <a class="btn btn-outline" href="/book.html?class=Year%205%20Paper%20Class&day=Saturday&time=17%3A00-19%3A00&waitlist=true">Join Waiting List</a>
+          </div>
+        </div>
+
+        <div class="session" data-day="Monday" data-status="open">
+          <h4>Monday • 5–7pm</h4>
+          <p class="muted">In-centre • Year 5 • 11+ Paper Class</p>
+          <div class="actions">
+            <a class="btn btn-light" href="/book.html?class=Year%205%20Paper%20Class&day=Monday&time=17%3A00-19%3A00">Book Now</a>
+            <a class="btn btn-outline" href="/book.html?class=Year%205%20Paper%20Class&day=Monday&time=17%3A00-19%3A00&waitlist=true">Join Waiting List</a>
+          </div>
+        </div>
+
+        <div class="session" data-day="Wednesday" data-status="open">
+          <h4>Wednesday • 5–7pm</h4>
+          <p class="muted">In-centre • Year 5 • 11+ Paper Class</p>
+          <div class="actions">
+            <a class="btn btn-light" href="/book.html?class=Year%205%20Paper%20Class&day=Wednesday&time=17%3A00-19%3A00">Book Now</a>
+            <a class="btn btn-outline" href="/book.html?class=Year%205%20Paper%20Class&day=Wednesday&time=17%3A00-19%3A00&waitlist=true">Join Waiting List</a>
+          </div>
+        </div>
+
+        <div class="session" data-day="Friday" data-status="open">
+          <h4>Friday • 5–7pm</h4>
+          <p class="muted">In-centre • Year 5 • 11+ Paper Class</p>
+          <div class="actions">
+            <a class="btn btn-light" href="/book.html?class=Year%205%20Paper%20Class&day=Friday&time=17%3A00-19%3A00">Book Now</a>
+            <a class="btn btn-outline" href="/book.html?class=Year%205%20Paper%20Class&day=Friday&time=17%3A00-19%3A00&waitlist=true">Join Waiting List</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice" style="margin-top:1rem">
+        <strong>Limited places:</strong> Seats are allocated on a first-come basis. Booking confirms attendance. If a class is full, please join the waiting list; we’ll notify you when a space becomes available.
+      </div>
+    </section>
+
+    <!-- YouTube + contact -->
+    <section class="grid" style="margin-top:1.25rem" aria-label="Support & resources">
+      <article class="card">
+        <h3>Video Solutions for Tough Maths</h3>
+        <p>We publish short, focused walk-throughs for the most challenging Maths questions from class.</p>
+        <p><a class="cta-button" href="https://www.youtube.com/@ExamTeq" target="_blank" rel="noopener">Watch on YouTube</a></p>
+        <p class="muted">New videos are linked in class and via email. For queries, contact <a href="mailto:info@examteq.com">info@examteq.com</a>.</p>
+      </article>
+
+      <article class="card">
+        <h3>What to Bring</h3>
+        <ul class="list">
+          <li>Stationery: pencils (HB), eraser, sharpener, ruler</li>
+          <li>One A4 book for essay writing</li>
+          <li>Water bottle</li>
+        </ul>
+        <p class="muted">Please arrive 5–10 minutes early, paper begins at 5pm sharp.</p>
+      </article>
+    </section>
   </main>
 
-  <!-- Footer (Same as before) -->
-  <footer>
-    <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 30px 20px;">
-      <div style="flex: 1; min-width: 250px;">
-        <h3>About ExamTeq</h3>
-        <p>Established in 2014, ExamTeq delivers premium tutoring services for 11+, KS2, and GCSE learners. Our tutors help students master techniques and excel in their academic goals.</p>
+ <!-- FOOTER (same site footer pattern) -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <a class="footer-logo" href="/index.html" aria-label="ExamTeq Home"><span>ExamTeq</span></a>
+        <p class="footer-blurb">Premium tutoring since 2014 — structured English, Maths, and 11+ preparation with clear feedback and steady progress.</p>
+        <div class="footer-social">
+          <a class="ig" href="https://www.instagram.com/examteq" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.35 3.608 1.325.975.975 1.262 2.242 1.324 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.35 2.633-1.325 3.608-.975.975-2.242 1.262-3.608 1.324-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.35-3.608-1.325-.975-.975-1.262-2.242-1.324-3.608C2.175 15.747 2.163 15.367 2.163 12s.012-3.584.07-4.85c.062-1.366.35-2.633 1.325-3.608C4.533 2.567 5.8 2.28 7.166 2.218 8.432 2.16 8.812 2.163 12 2.163zm0 3.675a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm7.2-1.358a1.44 1.44 0 1 0 0 2.882 1.44 1.44 0 0 0 0-2.882z"/></svg>
+          </a>
+          <a class="yt" href="https://www.youtube.com/@ExamTeq" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.001 3.001 0 0 0-2.112-2.12C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.386.566a3 3 0 0 0-2.112 2.12C0 8.083 0 12 0 12s0 3.917 .502 5.814a3 3 0 0 0 2.112 2.12C4.5 20.5 12 20.5 12 20.5s7.5 0 9.386-.566a3 3 0 0 0 2.112-2.12C24 15.917 24 12 24 12s0-3.917-.502-5.814zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          </a>
+          <a class="fb" href="https://www.facebook.com/examteq" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.675 0h-21.35C.596 0 0 .596 0 1.326v21.348C0 23.404.596 24 1.326 24h11.495v-9.294H9.691V11.41h3.13V8.708c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.764v2.314h3.587l-.467 3.296h-3.12V24h6.116C23.404 24 24 23.404 24 22.674V1.326C24 .596 23.404 0 22.675 0z"/></svg>
+          </a>
+          <a class="wa" href="https://wa.me/447404585113" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12.04 2a9.96 9.96 0 0 0-8.51 15.2L2 22l4.93-1.47A9.96 9.96 0 1 0 12.04 2zm5.88 15.03c-.24.69-1.2 1.27-1.98 1.44-.53.11-1.22.2-3.56-.74-2.99-1.24-4.92-4.29-5.07-4.49-.15-.2-1.21-1.61-1.21-3.07 0-1.46.77-2.17 1.04-2.47.24-.27.64-.39 1.03-.39.12 0 .23 0 .33.01.29.01.44.03.63.49.24.58.83 2 .9 2.15.07.15.12.32.02.52-.1.2-.15.31-.3.48-.15.17-.31.39-.44.53-.14.14-.28.3-.12.58.15.27.66 1.08 1.41 1.75.97.86 1.79 1.13 2.06 1.26.27.13.43.11.59-.06.16-.17.68-.79.86-1.06.18-.27.36-.22.61-.13.25.09 1.6.75 1.88.88.28.13.46.2.53.31.07.12.07.69-.17 1.38z"/>
+            </svg>
+          </a>
+        </div>
       </div>
-      <div style="flex: 1; min-width: 200px;">
+
+      <nav class="footer-col footer-links" aria-label="Footer">
         <h3>Quick Links</h3>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="book.html">Book a Trial</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="mock-exams.html">Mock Exams</a></li>
-          <li><a href="resources.html">Free Resources</a></li>
-          <li><a href="login.html">Member Login</a></li>
+        <ul>
+          <li><a href="/book.html">Book a Trial</a></li>
+          <li><a href="/mock-exams.html">Mock Exams</a></li>
+          <li><a href="/resources.html">Resources</a></li>
+          <li><a href="/contact.html">Contact</a></li>
         </ul>
-      </div>
-      <div style="flex: 1; min-width: 200px;">
+      </nav>
+
+      <div class="footer-col footer-contact">
         <h3>Contact</h3>
-        <p>Email: info@examteq.com<br>
-          Phone: +44 1234 567890<br>
-          Location: London, UK</p>
+        <ul class="contact-list">
+          <li><strong>Email:</strong> <a href="mailto:info@examteq.com">info@examteq.com</a></li>
+          <li><strong>WhatsApp:</strong> <a href="tel:+447404585113">+44 7404 585113</a></li>
+          <li><strong>Company number:</strong> 07404585113</li>
+          <li><strong>Location:</strong> London, United Kingdom</li>
+        </ul>
+        <div class="footer-legal-links">
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/cookies.html">Cookies</a>
+          <a href="/safeguarding.html">Safeguarding</a>
+        </div>
       </div>
-    </div>
-    <div style="text-align: center; padding: 15px; background: #111; color: #bbb;">
-      <p>&copy; 2025 ExamTeq. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Same nav JS as index/contact -->
+  <script>
+    (function(){
+      const nav = document.getElementById('navLinks');
+      const ham = document.querySelector('.hamburger');
+      if (ham && nav) {
+        ham.addEventListener('click', () => {
+          const open = nav.classList.toggle('active');
+          ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+      // Close on link click (mobile)
+      document.querySelectorAll('#navLinks a').forEach(a => {
+        a.addEventListener('click', () => {
+          if (nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            ham && ham.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+      // Mobile submenu tap
+      document.querySelectorAll('.has-submenu > .has-popup').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const isDesktop = window.matchMedia('(min-width: 861px)').matches;
+          if (isDesktop) return; // desktop uses :hover
+          e.preventDefault();
+          const li = link.parentElement;
+          const open = li.classList.toggle('open');
+          link.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+    })();
+
+    // Optional: mark sessions as "Full" to steer users to waiting list.
+    // Example: setStatus('Saturday', 'full')
+    function setStatus(day, status){
+      const el = document.querySelector(`.session[data-day="${day}"]`);
+      if(!el) return;
+      const isFull = status === 'full';
+      el.dataset.status = status;
+      const bookBtn = el.querySelector('.btn-light');
+      if(isFull){
+        el.insertAdjacentHTML('beforeend',
+          '<div class="notice danger" style="margin-top:.75rem"><strong>Full:</strong> Please join the waiting list for this slot.</div>');
+        if(bookBtn){ bookBtn.classList.add('btn-primary'); bookBtn.textContent = 'Join Waiting List'; bookBtn.href += '&waitlist=true'; }
+      }
+    }
+    // setStatus('Saturday','full'); // demo
+  </script>
 </body>
 </html>

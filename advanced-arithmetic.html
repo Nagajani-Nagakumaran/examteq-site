@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ExamTeq • Advanced Arithmetic</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="advanced-arithmetic.css" />
+</head>
+<body>
+  <header class="hdr no-print">
+    <div class="wrap">
+      <h1>Advanced Arithmetic</h1>
+      <p>Practice higher level arithmetic (4 operations + BODMAS). Timed test. Certificate for ≥80%.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Controls -->
+    <section class="panel no-print" id="controls">
+      <div class="row">
+        <label for="studentName" class="lbl">Student name</label>
+        <input id="studentName" class="input" placeholder="Type full name…" />
+      </div>
+      <div class="row">
+        <label for="questionCount" class="lbl">Number of questions</label>
+        <select id="questionCount" class="input">
+          <option>10</option>
+          <option selected>12</option>
+          <option>15</option>
+          <option>20</option>
+        </select>
+        <label for="minutes" class="lbl">Time (minutes)</label>
+        <select id="minutes" class="input">
+          <option>5</option>
+          <option selected>7</option>
+          <option>10</option>
+          <option>12</option>
+        </select>
+         <label for="mode" class="lbl">Mode</label>
+        <select id="mode" class="input">
+          <option value="mcq" selected>Multiple Choice</option>
+          <option value="fill">Fill in answer</option>
+        </select>
+        <button id="startBtn" class="btn">Start</button>
+      </div>
+      <div class="timer" id="timer" aria-live="polite">⏱ –:–</div>
+    </section>
+
+    <!-- Questions -->
+    <section id="quiz" class="panel no-print hidden">
+      <ol id="qList" class="q-list"></ol>
+      <div class="actions">
+        <button id="submitBtn" class="btn">Submit</button>
+        <button id="restartBtn" class="btn btn-ghost">Restart</button>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section id="result" class="panel no-print hidden">
+      <h2>Results</h2>
+      <p id="scoreLine"></p>
+      <p id="detailLine"></p>
+      <div id="certUnlock" class="hidden">
+        <p class="pass">🎉 Great work! You’ve unlocked your certificate.</p>
+        <div class="row">
+          <button id="showCertBtn" class="btn">Preview Certificate</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificate (prints alone) -->
+    <section id="certificate" class="certificate hidden">
+      <!-- SVG certificate; styled for A4 landscape -->
+      <svg id="certSvg" viewBox="0 0 3508 2480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ExamTeq Certificate">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#0b1324"/>
+            <stop offset="1" stop-color="#0f1a33"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="3508" height="2480" fill="url(#g1)"/>
+        <rect x="160" y="160" width="3188" height="2160" rx="60" fill="#fff"/>
+        <rect x="220" y="220" width="3068" height="2040" rx="40" fill="#f9fafc" stroke="#dbe4f0" stroke-width="6"/>
+
+        <!-- Logo placeholder; replace href with your /logo.png path if you like -->
+        <image id="logoImg" href="/logo.png" x="1580" y="280" width="348" height="348" preserveAspectRatio="xMidYMid meet" />
+
+        <text x="1754" y="760" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="120" fill="#0b1324" font-weight="700">
+          Certificate of Achievement
+        </text>
+
+        <text x="1754" y="960" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="56" fill="#334155">
+          This certifies that
+        </text>
+
+        <text id="certName" x="1754" y="1100" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="110" fill="#0b1324" font-weight="700">
+          Student Name
+        </text>
+
+        <text x="1754" y="1230" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="56" fill="#334155">
+          has successfully completed the
+        </text>
+        <text x="1754" y="1320" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="72" fill="#0b1324" font-weight="700">
+          Advanced Arithmetic Timed Test
+        </text>
+
+        <text id="certScore" x="1754" y="1460" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="68" fill="#0ea5e9" font-weight="700">
+          Score: 0% (0 / 0)
+        </text>
+        <text id="certDate" x="1754" y="1560" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="48" fill="#334155">
+          Dated: —
+        </text>
+
+        <!-- Signature lines -->
+        <line x1="900" y1="1920" x2="1750" y2="1920" stroke="#0b1324" stroke-width="6"/>
+        <text x="1325" y="1985" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="44" fill="#334155">
+          Teacher / Tutor
+        </text>
+
+        <line x1="1900" y1="1920" x2="2750" y2="1920" stroke="#0b1324" stroke-width="6"/>
+        <text x="2325" y="1985" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="44" fill="#334155">
+          Signature
+        </text>
+
+        <text x="1754" y="2140" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="38" fill="#64748b">
+          ExamTeq • Strive for Success
+        </text>
+      </svg>
+
+      <!-- Certificate action buttons (hidden in print) -->
+      <div class="cert-actions no-print">
+        <button id="printCertBtn" class="btn">Print / Save as PDF</button>
+        <button id="downloadPngBtn" class="btn btn-ghost">Download PNG</button>
+        <button id="closeCertBtn" class="btn btn-ghost">Close</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap no-print">
+    <p>&copy; <span id="yr"></span> ExamTeq</p>
+  </footer>
+
+  <script src="advanced-arithmetic.js"></script>
+</body>
+</html>

@@ -5,94 +5,203 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Explore ExamTeq's tutoring programmes for 11+, KS2, KS3, and GCSE." />
   <title>Our Services | ExamTeq</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    :root { --etq-max: 1100px; }
+    .container { max-width: var(--etq-max); margin: 0 auto; padding: 2rem 1rem; }
+    .page-hero { text-align: center; padding: 2.75rem 1rem 1rem; }
+    .page-hero h1 { font-size: clamp(2rem, 3.5vw, 2.75rem); margin: 0 0 .5rem; }
+    .muted { color: var(--muted); }
+    .programs { display:grid; gap:1rem; grid-template-columns: repeat(2,1fr); }
+    @media (max-width: 900px){ .programs { grid-template-columns: 1fr; } }
+    .program-card { position:relative }
+    .program-card h3 { margin:.25rem 0 .25rem; }
+    .program-card .badge { position:absolute; right:1rem; top:1rem; }
+
+    /* Pricing teaser */
+    .pricing { display:grid; grid-template-columns: repeat(3,1fr); gap:1rem; margin-top:1rem; }
+    @media (max-width: 900px){ .pricing { grid-template-columns: 1fr; } }
+    .price-card h4 { margin:.25rem 0 .25rem; }
+    .price { font-size:1.75rem; font-weight:700; }
+
+    /* FAQ */
+    .faq { margin-top:2rem; }
+    .faq details { border:1px solid var(--edge); border-radius:12px; padding: .75rem 1rem; background:#fff; }
+    .faq details + details { margin-top:.75rem; }
+    .faq summary { cursor:pointer; font-weight:600; }
+    .faq summary::-webkit-details-marker { display:none; }
+  </style>
 </head>
 <body>
   <header>
-    <nav class="navbar">
+    <nav class="navbar container">
       <div class="logo">ExamTeq</div>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="book.html">Book</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="mock-exams.html">Mock Exams</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="testimonials.html">Testimonials</a></li>
-        <li><a href="resources.html">Free Resources</a></li>
-        <li><a href="login.html" class="nav-link">Member Login</a></li>
-        <li><a href="book.html" class="cta-button">Book a Trial</a></li>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/book.html">Book</a></li>
+        <li><a class="active" href="/services.html">Services</a></li>
+        <li><a href="/mock-exams.html">Mock Exams</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/testimonials.html">Testimonials</a></li>
+        <li><a href="/resources.html">Free Resources</a></li>
+        <li><a href="/login.html" class="nav-link">Member Login</a></li>
+        <li><a href="/book.html" class="cta-button">Book a Trial</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="form-section">
+  <!-- HERO -->
+  <section class="page-hero container">
     <h1>Our Tutoring Programmes</h1>
-    <p>At ExamTeq, we specialize in premium academic support across primary and secondary levels:</p>
+    <p class="muted">Premium support for primary and secondary learners. Choose a pathway below or start with a free call.</p>
+  </section>
 
-    <div class="service-grid" style="margin-top: 2rem;">
-      <div class="service-card">
+  <main class="container">
+    <!-- PROGRAM CARDS -->
+    <section class="programs" aria-label="Programme list">
+      <!-- 11+ -->
+      <article class="card program-card">
+        <span class="badge">11+</span>
         <h3>11+ Paper Class</h3>
+        <p class="muted">Weekly timed papers, real-exam conditions, targeted feedback.</p>
         <ul>
-          <li>Timed paper practice</li>
-          <li>Personalised feedback</li>
-          <li>Grammar school readiness</li>
+          <li>Timed practice (English / VR / Maths / NVR)</li>
+          <li>Live feedback & weekly targets</li>
+          <li>Grammar & independent school prep</li>
         </ul>
-      </div>
-      <div class="service-card">
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem;">
+          <a class="cta-button" href="/mock-exams.html">View mock dates</a>
+          <a class="cta-button secondary" href="/book.html?subject=11%2B%20Paper%20Class">Book a trial</a>
+        </div>
+      </article>
+
+      <!-- KS2 English -->
+      <article class="card program-card">
+        <span class="badge">KS2</span>
         <h3>KS2 English Mastery</h3>
+        <p class="muted">Comprehension, grammar, vocabulary & composition for Years 3–6.</p>
         <ul>
-          <li>Reading, grammar, writing</li>
-          <li>Creative composition</li>
-          <li>11+ curriculum-aligned</li>
+          <li>Reading skills & inference drills</li>
+          <li>Grammar & punctuation refreshers</li>
+          <li>Creative and report writing</li>
         </ul>
-      </div>
-      <div class="service-card">
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem;">
+          <a class="cta-button" href="/resources.html#videos">Watch a sample lesson</a>
+          <a class="cta-button secondary" href="/book.html?subject=KS2%20English%20Mastery">Book a trial</a>
+        </div>
+      </article>
+
+      <!-- KS2 Maths -->
+      <article class="card program-card">
+        <span class="badge">KS2</span>
         <h3>KS2 Maths Mastery</h3>
+        <p class="muted">Reasoning and arithmetic fluency, speed practice & tracking.</p>
         <ul>
-          <li>Mental maths & problem solving</li>
-          <li>Arithmetic skills</li>
-          <li>Weekly tracking tasks</li>
+          <li>Mental maths sprints</li>
+          <li>Problem-solving frameworks</li>
+          <li>Weekly targets and review</li>
         </ul>
-      </div>
-      <div class="service-card">
-        <h3>Secondary (KS3–GCSE)</h3>
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem;">
+          <a class="cta-button" href="/resources.html#downloads">Download a sample</a>
+          <a class="cta-button secondary" href="/book.html?subject=KS2%20Maths%20Mastery">Book a trial</a>
+        </div>
+      </article>
+
+      <!-- Secondary -->
+      <article class="card program-card">
+        <span class="badge">KS3–GCSE</span>
+        <h3>Secondary Programmes</h3>
+        <p class="muted">English, Maths, and Sciences with exam technique & study skills.</p>
         <ul>
-          <li>English, Maths, Sciences</li>
-          <li>Essay writing, exam technique</li>
-          <li>Tailored for each year group</li>
+          <li>Essay writing and structure</li>
+          <li>Topic-by-topic revision plans</li>
+          <li>Targeted past paper practice</li>
         </ul>
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem;">
+          <a class="cta-button" href="/book.html?subject=Secondary%20(English%2FMaths%2FScience)">Book a free call</a>
+          <a class="cta-button secondary" href="/topic-tests.html">Explore topic tests</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- PRICING TEASER -->
+    <section class="section" aria-label="Pricing">
+      <h2 class="section-title" style="text-align:center;">Tuition Options</h2>
+      <div class="pricing">
+        <article class="card price-card">
+          <h4>Trial Session</h4>
+          <p class="price">Free</p>
+          <p class="muted">15-minute consultation + learning plan</p>
+          <a class="cta-button" href="/book.html?subject=Trial%20Consultation">Book now</a>
+        </article>
+        <article class="card price-card">
+          <h4>1‑to‑1 Tuition</h4>
+          <p class="price">£45–£65<span class="muted" style="font-size:.9rem;">/hr</span></p>
+          <p class="muted">Online or in‑centre • DBS‑checked tutors</p>
+          <a class="cta-button" href="/book.html?subject=1-to-1%20Tuition">Enquire</a>
+        </article>
+        <article class="card price-card">
+          <h4>Paper Class</h4>
+          <p class="price">from £25</p>
+          <p class="muted">Weekly timed papers + feedback</p>
+          <a class="cta-button" href="/mock-exams.html">View schedule</a>
+        </article>
       </div>
-    </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" aria-label="Frequently asked questions">
+      <h2 class="section-title" style="text-align:center;">FAQs</h2>
+      <details>
+        <summary>Do you offer a free trial?</summary>
+        <p class="muted">Yes. Most families begin with a 15‑minute consultation to discuss goals and design a tailored plan.</p>
+      </details>
+      <details>
+        <summary>Online or in‑centre?</summary>
+        <p class="muted">We support both. Choose your preference when booking. Mixed mode (online + in‑centre) is available.</p>
+      </details>
+      <details>
+        <summary>How do progress reports work?</summary>
+        <p class="muted">You’ll receive weekly feedback and periodic progress summaries aligned to school targets and upcoming exams.</p>
+      </details>
+    </section>
+
+    <!-- CTA STRIP -->
+    <section class="container" style="padding: 2rem 0;">
+      <div class="cta-strip">
+        <h3>Ready to start?</h3>
+        <p>Book a free consultation and we’ll build a plan for your child.</p>
+        <p style="margin-top:.5rem;"><a href="/book.html" class="cta-button">Book a Trial</a></p>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer>
-    <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 30px 20px;">
-      <div style="flex: 1; min-width: 250px;">
-        <h3>About ExamTeq</h3>
-        <p>Established in 2014, ExamTeq delivers premium tutoring services for 11+, KS2, and GCSE learners. Our tutors help students master techniques and excel in their academic goals.</p>
+    <div class="footer-inner">
+      <div class="footer-block">
+        <h3>About</h3>
+        <p>Premium tutoring since 2014 – helping students master exams through structured learning.</p>
       </div>
-      <div style="flex: 1; min-width: 200px;">
-        <h3>Quick Links</h3>
-        <ul style="list-style: none; padding: 0;">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="book.html">Book a Trial</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="mock-exams.html">Mock Exams</a></li>
-          <li><a href="resources.html">Free Resources</a></li>
-          <li><a href="login.html">Member Login</a></li>
+      <div class="footer-block">
+        <h3>Links</h3>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/book.html">Book</a></li>
+          <li><a href="/mock-exams.html">Mocks</a></li>
+          <li><a href="/resources.html">Resources</a></li>
+          <li><a href="/login.html">Login</a></li>
         </ul>
       </div>
-      <div style="flex: 1; min-width: 200px;">
+      <div class="footer-block">
         <h3>Contact</h3>
-        <p>Email: info@examteq.com<br>
-          Phone: +44 1234 567890<br>
-          Location: London, UK</p>
+        <p><a href="mailto:info@examteq.com">info@examteq.com</a><br/>+44 1234 567890<br/>London, UK</p>
       </div>
     </div>
-    <div style="text-align: center; padding: 15px; background: #111; color: #bbb;">
-      <p>&copy; 2025 ExamTeq. All rights reserved.</p>
-    </div>
+    <div class="footer-copy">&copy; 2025 ExamTeq. All rights reserved.</div>
   </footer>
+
+  <!-- Optional: Supabase auth header switch -->
+  <!-- <script type="module" src="/js/auth-header.js"></script> -->
 </body>
 </html>

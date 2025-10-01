@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ExamTeq • Times Tables Practice (× & ÷)</title>
+
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="timestable.css" />
+</head>
+<body>
+  <header class="hdr">
+    <div class="wrap hdr-inner">
+      <h1 class="logo">🧮 ExamTeq • Times Tables</h1>
+      <a class="back" href="resources.html">← Back to Resources</a>
+    </div>
+  </header>
+
+  <main class="wrap grid">
+    <!-- LEFT: controls -->
+    <section class="panel" aria-labelledby="choose">
+      <h2 id="choose">Choose what to practise</h2>
+
+    <div class="box">
+        <label class="label" for="student">Student name (for certificate)</label>
+        <input id="student" type="text" placeholder="Optional" autocomplete="name" />
+      </div>
+      
+      <div class="box">
+        <div class="label">Tables</div>
+        <div id="tables" class="tables" aria-label="Select tables from 1× to 12×"></div>
+        <div class="mini-actions" role="group" aria-label="Quick selects">
+          <button id="all"   class="chip-ghost" type="button">Select all</button>
+          <button id="none"  class="chip-ghost" type="button">Clear</button>
+          <button id="evens" class="chip-ghost" type="button">Evens</button>
+          <button id="odds"  class="chip-ghost" type="button">Odds</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="box">
+          <div class="label">Question Type</div>
+          <div class="pills">
+            <input type="radio" name="op" id="op-mul" value="mul" checked><label for="op-mul">Multiplication (×)</label>
+            <input type="radio" name="op" id="op-div" value="div"><label for="op-div">Division (÷)</label>
+            <input type="radio" name="op" id="op-mix" value="mix"><label for="op-mix">Mixed (× & ÷)</label>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="label">Answer Mode</div>
+          <div class="pills">
+            <input type="radio" name="mode" id="m-fill" value="fill" checked><label for="m-fill">Fill-in</label>
+            <input type="radio" name="mode" id="m-mcq" value="mcq"><label for="m-mcq">Multiple choice</label>
+            <input type="radio" name="mode" id="m-mixed" value="mix"><label for="m-mixed">Mixed</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="box">
+          <div class="label">Order</div>
+          <div class="pills">
+            <input type="radio" name="order" id="o-seq" value="sequential" checked><label for="o-seq">In order</label>
+            <input type="radio" name="order" id="o-rand" value="random"><label for="o-rand">Random</label>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="label">Goal</div>
+          <div class="pills">
+            <input type="radio" name="goal" id="g10" value="10" checked><label for="g10">10 Qs</label>
+            <input type="radio" name="goal" id="g20" value="20"><label for="g20">20 Qs</label>
+            <input type="radio" name="goal" id="g30" value="30"><label for="g30">30 Qs</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="startbar">
+        <div class="btns">
+          <!-- Open the separate flashcards site with current selections -->
+          <p style="margin-top:.5rem;"><a class="cta-button" href="/flashcards.html">Memorise with Flash Cards</a></p>
+          <button id="reset" class="btn-ghost" type="button">Reset</button>
+          <button id="start" class="btn" type="button">Start practice</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: game -->
+    <section class="panel" aria-labelledby="answer">
+      <h2 id="answer">Answer the questions</h2>
+      <div class="progress" aria-hidden="true"><div id="bar" class="bar"></div></div>
+
+      <div class="stats" role="status" aria-live="polite">
+        <div class="stat">Correct: <b id="sc">0</b></div>
+        <div class="stat">Attempted: <b id="sa">0</b></div>
+        <div class="stat">Streak: <b id="ss">0</b></div>
+        <div class="stat">Time: <b id="tm">0</b>s</div>
+      </div>
+
+      <div id="card" class="qcard" aria-live="polite">
+        <p class="hint">Choose times tables to test yourself and press <em>Start practice</em> — or use <em>Flash cards</em> to memorise.</p>
+      </div>
+
+      <div id="msg" class="feedback" aria-live="polite"></div>
+
+      <div class="row-actions">
+        <button id="submit" class="btn" type="button" disabled>Submit</button>
+        <button id="print" class="btn-ghost" type="button" disabled style="display:none">Download certificate</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ftr">© <span id="yr"></span> ExamTeq • Free 1×–12× practice</footer>
+
+  <script src="timestable.js" defer></script>
+</body>
+</html>

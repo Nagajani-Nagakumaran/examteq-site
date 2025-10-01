@@ -5,71 +5,176 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Buy ExamTeq topic tests and unlock guided video tutorials. Ideal for focused learning and revision." />
   <title>Topic Tests | ExamTeq</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    :root { --etq-max: 1100px; }
+    .container { max-width: var(--etq-max); margin: 0 auto; padding: 2rem 1rem; }
+    .page-hero { text-align: center; padding: 2.75rem 1rem 1rem; }
+    .page-hero h1 { font-size: clamp(2rem, 3.5vw, 2.75rem); margin: 0 0 .5rem; }
+    .muted { color: var(--muted); }
+
+    /* chip filters */
+    .chipbar { display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; margin: .5rem 0 1.25rem; }
+    .chip { border:1px solid var(--edge); background:var(--soft); padding:.4rem .75rem; border-radius:999px; cursor:pointer; user-select:none; }
+    .chip.active { background:#eef6ff; border-color:#d9e9ff; }
+
+    /* product grid */
+    .grid { display:grid; gap:1rem; grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 920px){ .grid { grid-template-columns: 1fr; } }
+    .product h3 { margin:.25rem 0 .35rem; }
+    .product .meta { font-size:.92rem; }
+    .product .price { font-weight:700; }
+    .lock { font-size:.85rem; }
+
+    /* banner */
+    .member-banner { background:#111; color:#fff; border-radius:16px; padding:1rem; text-align:center; }
+  </style>
 </head>
 <body>
   <header>
-    <nav class="navbar">
+    <nav class="navbar container">
       <div class="logo">ExamTeq</div>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="book.html">Book</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="mock-exams.html">Mock Exams</a></li>
-        <li><a href="resources.html">Free Resources</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="topic-tests.html" class="cta-button">Topic Tests</a></li>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/book.html">Book</a></li>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/mock-exams.html">Mock Exams</a></li>
+        <li><a class="active" href="/topic-tests.html">Topic Tests</a></li>
+        <li><a href="/resources.html">Free Resources</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/login.html" class="nav-link">Member Login</a></li>
+        <li><a href="/book.html" class="cta-button">Book a Trial</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="form-section">
+  <!-- HERO -->
+  <section class="page-hero container">
     <h1>Interactive Topic Tests</h1>
-    <p>Master key concepts with downloadable tests + exclusive video solutions. All tests are marked with feedback and ideal for targeted revision.</p>
+    <p class="muted">Master key concepts with downloadable tests + guided video solutions. Perfect for focused revision and measurable progress.</p>
+  </section>
 
-    <div class="service-grid" style="margin-top: 2rem;">
-      <div class="service-card">
-        <h3>English: Comprehension</h3>
-        <p>Includes:</p>
+  <main class="container">
+    <!-- FILTERS -->
+    <div class="chipbar" id="chips" role="tablist" aria-label="Filter topic tests">
+      <button class="chip active" data-filter="all" role="tab" aria-selected="true">All</button>
+      <button class="chip" data-filter="english" role="tab">English</button>
+      <button class="chip" data-filter="maths" role="tab">Maths</button>
+      <button class="chip" data-filter="grammar" role="tab">Grammar</button>
+    </div>
+
+    <!-- PRODUCTS -->
+    <section class="grid" id="products" aria-live="polite">
+      <!-- English Comprehension -->
+      <article class="card product" data-tags="english">
+        <h3>English: Comprehension Pack</h3>
+        <p class="muted meta">Years 4–6 • 5 papers • model answers</p>
         <ul>
-          <li>5 unique comprehension papers</li>
-          <li>Model answers & video analysis</li>
-          <li>For Years 4–6</li>
+          <li>5 unique comprehension papers (mixed difficulty)</li>
+          <li>Model answers + marking guide</li>
+          <li>Video analysis for each paper <span class="lock">(members)</span></li>
         </ul>
-        <a href="#" class="cta-button">Buy Now</a>
-      </div>
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; margin-top:.5rem;">
+          <span class="price">£7.99</span>
+          <a href="#" class="cta-button" onclick="buy('English: Comprehension Pack','7.99')">Buy Now</a>
+          <a href="#" class="cta-button secondary" onclick="prefill('/book.html',{subject:'English Comprehension Check‑in'})">Book a check‑in</a>
+        </div>
+      </article>
 
-      <div class="service-card">
-        <h3>Maths: Word Problems</h3>
-        <p>Includes:</p>
+      <!-- Maths Word Problems -->
+      <article class="card product" data-tags="maths">
+        <h3>Maths: Word Problems Set</h3>
+        <p class="muted meta">Years 4–6 • 10 scenario questions • video breakdown</p>
         <ul>
-          <li>10 scenario-based questions</li>
-          <li>Step-by-step video breakdown</li>
-          <li>Auto-marked via Google Forms</li>
+          <li>10 problem‑solving tasks with structured hints</li>
+          <li>Step‑by‑step solution videos <span class="lock">(members)</span></li>
+          <li>Auto‑marked Google Form (optional)</li>
         </ul>
-        <a href="#" class="cta-button">Buy Now</a>
-      </div>
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; margin-top:.5rem;">
+          <span class="price">£6.99</span>
+          <a href="#" class="cta-button" onclick="buy('Maths: Word Problems Set','6.99')">Buy Now</a>
+          <a href="#" class="cta-button secondary" onclick="prefill('/book.html',{subject:'Maths Word‑Problems Review'})">Book a check‑in</a>
+        </div>
+      </article>
 
-      <div class="service-card">
+      <!-- Grammar & Vocabulary -->
+      <article class="card product" data-tags="grammar,english">
         <h3>Grammar & Vocabulary</h3>
-        <p>Includes:</p>
+        <p class="muted meta">Synonyms • Antonyms • Grammar MCQs</p>
         <ul>
-          <li>Synonym/Antonym drills</li>
-          <li>Grammar MCQs + tips video</li>
+          <li>Targeted synonym/antonym drills</li>
+          <li>Grammar MCQs + tips video <span class="lock">(members)</span></li>
           <li>Trackable PDF workbook</li>
         </ul>
-        <a href="#" class="cta-button">Buy Now</a>
-      </div>
-    </div>
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; margin-top:.5rem;">
+          <span class="price">£5.99</span>
+          <a href="#" class="cta-button" onclick="buy('Grammar & Vocabulary','5.99')">Buy Now</a>
+          <a href="#" class="cta-button secondary" onclick="prefill('/book.html',{subject:'Grammar & Vocab Support'})">Book a check‑in</a>
+        </div>
+      </article>
+    </section>
 
-    <div style="text-align: center; margin-top: 2.5rem;">
-      <h2>🎓 Member Access Only</h2>
-      <p>Video explanations are available to registered students. <a href="#">Log in</a> or <a href="#">create an account</a> to unlock full access.</p>
-    </div>
+    <!-- MEMBER BANNER -->
+    <section class="member-banner" style="margin-top:1.5rem;">
+      <strong>🎓 Member Access Only:</strong> Video explanations are available to registered students. <a href="/login.html" style="color:#fff; text-decoration:underline;">Log in</a> or <a href="/signup.html" style="color:#fff; text-decoration:underline;">create an account</a> to unlock full access.
+    </section>
   </main>
 
+  <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 ExamTeq. All rights reserved.</p>
+    <div class="footer-inner">
+      <div class="footer-block">
+        <h3>About</h3>
+        <p>Premium tutoring since 2014 – helping students master exams through structured learning.</p>
+      </div>
+      <div class="footer-block">
+        <h3>Links</h3>
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/book.html">Book</a></li>
+          <li><a href="/mock-exams.html">Mocks</a></li>
+          <li><a href="/resources.html">Resources</a></li>
+          <li><a href="/login.html">Login</a></li>
+        </ul>
+      </div>
+      <div class="footer-block">
+        <h3>Contact</h3>
+        <p><a href="mailto:info@examteq.com">info@examteq.com</a><br/>+44 1234 567890<br/>London, UK</p>
+      </div>
+    </div>
+    <div class="footer-copy">&copy; 2025 ExamTeq. All rights reserved.</div>
   </footer>
+
+  <!-- Optional: Supabase auth header switch -->
+  <!-- <script type="module" src="/js/auth-header.js"></script> -->
+
+  <script>
+    // Chip filtering
+    const chips = document.querySelectorAll('#chips .chip');
+    const products = document.querySelectorAll('#products .product');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active')); chip.classList.add('active');
+        const tag = chip.dataset.filter;
+        products.forEach(p => {
+          const tags = (p.dataset.tags || '').split(',').map(s => s.trim());
+          const show = tag === 'all' || tags.includes(tag);
+          p.style.display = show ? '' : 'none';
+        });
+      });
+    });
+
+    // Prefill helper
+    function prefill(url, params){
+      const qs = new URLSearchParams(params).toString();
+      location.href = `${url}?${qs}`;
+    }
+
+    // Buy placeholder (swap to Stripe later)
+    function buy(name, price){
+      // For now, send to booking with subject prefilled; can replace with Stripe Checkout
+      prefill('/book.html', { subject: `${name} — Purchase enquiry` });
+    }
+  </script>
 </body>
 </html>

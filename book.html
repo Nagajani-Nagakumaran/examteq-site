@@ -3,67 +3,579 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Book a tutoring session with ExamTeq – 11+, KS2, and GCSE support available." />
+  <meta name="description" content="Book a Teaching Lesson, Year 5 Paper Class, or join the Waiting List at ExamTeq." />
   <title>Book a Session | ExamTeq</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <link rel="stylesheet" href="/styles.css" />
+
+  <style>
+    .book-page .page-container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+    .page-hero { text-align: center; padding: 2.5rem 1rem 1rem; }
+    .page-hero h1 { font-size: clamp(2rem, 3.5vw, 2.75rem); margin-bottom: .5rem; }
+
+    .tabs { display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; margin:1rem 0 1.25rem; }
+    .tab-btn { border:1px solid #d8dce3; background:#f8fafc; padding:.6rem .9rem; border-radius:999px; cursor:pointer; font-weight:600; }
+    .tab-btn[aria-selected="true"]{ background:#0b1e44; color:#fff; border-color:#0b1e44; }
+
+    .panel { display:none; }
+    .panel.active { display:block; }
+
+    .card { background:#fff; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.06); padding: 1.5rem; }
+
+    form .row { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+    @media (max-width:720px){ form .row{ grid-template-columns:1fr; } }
+
+    label { display:block; font-weight:600; margin:.35rem 0 .25rem; }
+    input, select, textarea { width:100%; padding:.85rem 1rem; border-radius:10px; border:1px solid #d8dce3; background:#fafbfc; }
+    .actions{ margin-top:1rem; display:flex; gap:.5rem; flex-wrap:wrap; }
+    .cta{ background:#0b1e44; color:#fff; border:none; padding:.75rem 1rem; border-radius:10px; font-weight:700; cursor:pointer; }
+
+    .muted { font-size:.95rem; opacity:.9; }
+    .notice{ background:#eef6ff; border:1px solid #d8e7ff; color:#0b1e44; border-radius:12px; padding:.8rem 1rem; margin:0 0 1rem; }
+    .danger{ background:#fff2f2; border:1px solid #ffd1d1; color:#6d1a1a; }
+    .success{ background:#f2fff7; border:1px solid #c7f1d8; color:#0c4b2a; }
+  </style>
 </head>
-<body>
+
+<body class="book-page">
+  <!-- HEADER / NAV -->
   <header>
-    <nav class="navbar">
-      <div class="logo">ExamTeq</div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="book.html">Book</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="mock-exams.html">Mock Exams</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="testimonials.html">Testimonials</a></li>
-        <li><a href="resources.html">Free Resources</a></li>
-        <li><a href="login.html" class="nav-link">Member Login</a></li>
-        <li><a href="book.html" class="cta-button">Book a Trial</a></li>
+    <nav class="navbar container" aria-label="Primary">
+      <a class="logo" href="/index.html" aria-label="ExamTeq Home">
+        <img src="/logo.png" alt="ExamTeq logo" width="44" height="44" />
+        <span>ExamTeq</span>
+      </a>
+
+      <button class="hamburger" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">☰</button>
+
+      <ul class="nav-links" id="navLinks" role="menu">
+        <li role="none"><a role="menuitem" class="nav-link" href="/index.html">Home</a></li>
+        <li role="none"><a role="menuitem" class="nav-link" href="/mock-exams.html">Paper Class</a></li>
+
+        <li class="has-submenu" role="none">
+          <a role="menuitem" class="nav-link has-popup" href="/resources.html" aria-haspopup="true" aria-expanded="false">Resources</a>
+          <ul class="submenu" role="menu" aria-label="Resources submenu">
+            <li role="none"><a role="menuitem" href="/resources.html#videos">Online Lessons</a></li>
+            <li role="none"><a role="menuitem" href="/resources.html#downloads">Topic Tests</a></li>
+            <li role="none"><a role="menuitem" href="/timestable.html">Times Tables Practice</a></li>
+            <li role="none"><a role="menuitem" href="/advanced-arithmetic.html">Advanced Arithmetic Practice</a></li>
+          </ul>
+        </li>
+
+        <li role="none"><a role="menuitem" class="nav-link" href="/contact.html">Contact</a></li>
+        <li role="none"><a role="menuitem" class="nav-link" href="/login.html">Login</a></li>
+        <li role="none"><a role="menuitem" class="cta-button nav-cta" href="/book.html" aria-current="page">Book a Session</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="form-section">
+  <!-- Hero -->
+  <section class="page-hero page-container">
     <h1>Book a Session</h1>
-    <p>Complete the form below and we’ll confirm your booking by email.</p>
+    <p class="muted">Choose a <strong>Teaching Lesson</strong>, the <strong>Year 5 Paper Class</strong>, or join the <strong>Waiting List</strong>.</p>
+  </section>
 
-    <form name="booking" method="POST" data-netlify="true" action="thankyou.html">
-      <input type="hidden" name="form-name" value="booking" />
+  <!-- Content -->
+  <main class="page-container">
+    <!-- Tabs -->
+    <div class="tabs" role="tablist" aria-label="Booking type">
+      <button class="tab-btn" role="tab" id="tab-teaching" aria-controls="panel-teaching" aria-selected="true">Teaching Lesson</button>
+      <button class="tab-btn" role="tab" id="tab-paper" aria-controls="panel-paper" aria-selected="false">Year 5 Paper Class</button>
+      <button class="tab-btn" role="tab" id="tab-wait" aria-controls="panel-wait" aria-selected="false">Waiting List</button>
+    </div>
 
-      <label for="parent-name">Your Name</label>
-      <input type="text" id="parent-name" name="parent-name" required />
+    <!-- Teaching Lesson -->
+    <section id="panel-teaching" class="panel active" role="tabpanel" aria-labelledby="tab-teaching">
+      <div id="teaching-banner" class="notice" style="display:none;"></div>
+      <div class="card">
+        <h2>Teaching Lesson</h2>
+        <p class="muted">Weekly tuition. <strong>Year 3–6 only</strong>. Subjects: <strong>English</strong> or <strong>Maths</strong>.</p>
 
-      <label for="student-name">Student Name</label>
-      <input type="text" id="student-name" name="student-name" required />
+        <form id="form-teaching" name="Teaching Lesson Booking">
+          <input type="hidden" name="bookingType" value="teaching" />
+          <div class="row">
+            <div>
+              <label for="t-parent">Parent Name</label>
+              <input id="t-parent" name="parent" required />
+            </div>
+            <div>
+              <label for="t-email">Email</label>
+              <input id="t-email" name="email" type="email" required />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="t-phone">Phone Number</label>
+              <input id="t-phone" name="phone" type="tel" inputmode="tel" placeholder="+44…" required />
+            </div>
+            <div>
+              <label for="t-student">Student Name</label>
+              <input id="t-student" name="student" required />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="t-year">Year Group (Y3–Y6)</label>
+              <select id="t-year" name="year" required>
+                <option value="">Select…</option>
+                <option>Year 3</option>
+                <option>Year 4</option>
+                <option>Year 5</option>
+                <option>Year 6</option>
+              </select>
+            </div>
+            <div>
+              <label for="t-subject">Subject</label>
+              <select id="t-subject" name="subject" required>
+                <option value="">Select…</option>
+                <option>English</option>
+                <option>Maths</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="t-day">Preferred Day</label>
+              <select id="t-day" name="day" required>
+                <option value="">Select…</option>
+                <option>Saturday</option>
+                <option>Monday</option>
+                <option>Wednesday</option>
+                <option>Friday</option>
+              </select>
+            </div>
+            <div>
+              <label for="t-time">Preferred Time</label>
+              <select id="t-time" name="time" required>
+                <option value="">Select…</option>
+                <option>5:00–6:00pm</option>
+                <option>6:00–7:00pm</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="t-notes">Notes (optional)</label>
+              <input id="t-notes" name="notes" />
+            </div>
+          </div>
+          <div class="actions">
+            <button type="submit" class="cta">Request Teaching Lesson</button>
+          </div>
+        </form>
+      </div>
+    </section>
 
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" required />
+    <!-- Paper Class -->
+    <section id="panel-paper" class="panel" role="tabpanel" aria-labelledby="tab-paper">
+      <div id="paper-banner" class="notice" style="display:none;"></div>
+      <div class="card">
+        <h2>Year 5 Paper Class (11+)</h2>
+        <p class="muted"><strong>2 hours</strong> covering <strong>Maths</strong>, <strong>English</strong>, and <strong>Creative Writing</strong>. Slots: <strong>Sat / Mon / Wed / Fri 5–7pm</strong>. Limited places.</p>
 
-      <label for="subject">Choose a Subject</label>
-      <select id="subject" name="subject" required>
-        <option value="">-- Select --</option>
-        <option>11+ Mock Class</option>
-        <option>KS2 English</option>
-        <option>KS2 Maths</option>
-        <option>KS3 English</option>
-        <option>GCSE Science</option>
-        <option>Economics</option>
-      </select>
+        <form id="form-paper" name="Paper Class Booking">
+          <input type="hidden" name="bookingType" value="paper" />
+          <input type="hidden" id="paper-class-title" name="classTitle" value="Year 5 Paper Class" />
+          <div class="row">
+            <div>
+              <label for="p-parent">Parent Name</label>
+              <input id="p-parent" name="parent" required />
+            </div>
+            <div>
+              <label for="p-email">Email</label>
+              <input id="p-email" name="email" type="email" required />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="p-phone">Phone Number</label>
+              <input id="p-phone" name="phone" type="tel" inputmode="tel" placeholder="+44…" required />
+            </div>
+            <div>
+              <label for="p-student">Student Name</label>
+              <input id="p-student" name="student" required />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="p-day">Choose Day</label>
+              <select id="p-day" name="day" required>
+                <option value="">Select…</option>
+                <option>Saturday</option>
+                <option>Monday</option>
+                <option>Wednesday</option>
+                <option>Friday</option>
+              </select>
+            </div>
+            <div>
+              <label for="p-time">Time (fixed)</label>
+              <select id="p-time" name="time" required>
+                <option value="">Select…</option>
+                <option>5:00–7:00pm</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="p-notes">Notes (optional)</label>
+              <input id="p-notes" name="notes" placeholder="Medical, access, anything we should know" />
+            </div>
+          </div>
+          <div class="actions">
+            <button type="submit" class="cta">Book Paper Class</button>
+          </div>
+        </form>
+      </div>
+    </section>
 
-      <label for="date-time">Preferred Date/Time</label>
-      <input type="text" id="date-time" name="date-time" placeholder="e.g. Saturdays 10am" required />
+    <!-- Waiting List -->
+    <section id="panel-wait" class="panel" role="tabpanel" aria-labelledby="tab-wait">
+      <div id="wait-banner" class="notice" style="display:none;"></div>
+      <div class="card">
+        <h2>Waiting List</h2>
+        <p class="muted">If your Paper Class slot is full, join the waiting list and we’ll contact you when a place opens.</p>
 
-      <label for="notes">Additional Notes</label>
-      <textarea id="notes" name="notes" rows="4" placeholder="Allergies, learning needs, etc."></textarea>
-
-      <button type="submit" class="cta-button">Submit Booking</button>
-    </form>
+        <form id="form-wait" name="Waiting List">
+          <input type="hidden" name="bookingType" value="waitlist" />
+          <div class="row">
+            <div>
+              <label for="w-parent">Parent Name</label>
+              <input id="w-parent" name="parent" required />
+            </div>
+            <div>
+              <label for="w-email">Email</label>
+              <input id="w-email" name="email" type="email" required />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="w-phone">Phone Number</label>
+              <input id="w-phone" name="phone" type="tel" inputmode="tel" placeholder="+44…" required />
+            </div>
+            <div>
+              <label for="w-student">Student Name</label>
+              <input id="w-student" name="student" required />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="w-day">Preferred Day</label>
+              <select id="w-day" name="day" required>
+                <option value="">Select…</option>
+                <option>Saturday</option>
+                <option>Monday</option>
+                <option>Wednesday</option>
+                <option>Friday</option>
+              </select>
+            </div>
+            <div>
+              <label for="w-time">Preferred Time</label>
+              <select id="w-time" name="time" required>
+                <option value="">Select…</option>
+                <option>5:00–7:00pm</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label for="w-notes">Notes (optional)</label>
+              <input id="w-notes" name="notes" />
+            </div>
+          </div>
+          <div class="actions">
+            <button type="submit" class="cta">Join Waiting List</button>
+          </div>
+        </form>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 ExamTeq. All rights reserved.</p>
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <a class="footer-logo" href="/index.html" aria-label="ExamTeq Home"><span>ExamTeq</span></a>
+        <p class="footer-blurb">Premium tutoring since 2014 — structured English, Maths, and 11+ preparation with clear feedback and steady progress.</p>
+        <div class="footer-social">
+          <a class="ig" href="https://www.instagram.com/examteq" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.35 3.608 1.325.975.975 1.262 2.242 1.324 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.35 2.633-1.325 3.608-.975.975-2.242 1.262-3.608 1.324-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.35-3.608-1.325-.975-.975-1.262-2.242-1.324-3.608C2.175 15.747 2.163 15.367 2.163 12s.012-3.584.07-4.85c.062-1.366.35-2.633 1.325-3.608C4.533 2.567 5.8 2.28 7.166 2.218 8.432 2.16 8.812 2.163 12 2.163zm0 3.675a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm7.2-1.358a1.44 1.44 0 1 0 0 2.882 1.44 1.44 0 0 0 0-2.882z"/></svg>
+          </a>
+          <a class="yt" href="https://www.youtube.com/@ExamTeq" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.001 3.001 0 0 0-2.112-2.12C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.386.566a3 3 0 0 0-2.112 2.12C0 8.083 0 12 0 12s0 3.917 .502 5.814a3 3 0 0 0 2.112 2.12C4.5 20.5 12 20.5 12 20.5s7.5 0 9.386-.566a3 3 0 0 0 2.112-2.12C24 15.917 24 12 24 12s0-3.917-.502-5.814zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          </a>
+          <a class="fb" href="https://www.facebook.com/examteq" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.675 0h-21.35C.596 0 0 .596 0 1.326v21.348C0 23.404.596 24 1.326 24h11.495v-9.294H9.691V11.41h3.13V8.708c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.764v2.314h3.587l-.467 3.296h-3.12V24h6.116C23.404 24 24 23.404 24 22.674V1.326C24 .596 23.404 0 22.675 0z"/></svg>
+          </a>
+          <a class="wa" href="https://wa.me/447404585113" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12.04 2a9.96 9.96 0 0 0-8.51 15.2L2 22l4.93-1.47A9.96 9.96 0 1 0 12.04 2zm5.88 15.03c-.24.69-1.2 1.27-1.98 1.44-.53.11-1.22.2-3.56-.74-2.99-1.24-4.92-4.29-5.07-4.49-.15-.2-1.21-1.61-1.21-3.07 0-1.46.77-2.17 1.04-2.47.24-.27.64-.39 1.03-.39.12 0 .23 0 .33.01.29.01.44.03.63.49.24.58.83 2 .9 2.15.07.15.12.32.02.52-.1.2-.15.31-.3.48-.15.17-.31.39-.44.53-.14.14-.28.3-.12.58.15.27.66 1.08 1.41 1.75.97.86 1.79 1.13 2.06 1.26.27.13.43.11.59-.06.16-.17.68-.79.86-1.06.18-.27.36-.22.61-.13.25.09 1.6.75 1.88.88.28.13.46.2.53.31.07.12.07.69-.17 1.38z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <nav class="footer-col footer-links" aria-label="Footer">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/book.html">Book a Trial</a></li>
+          <li><a href="/mock-exams.html">Mock Exams</a></li>
+          <li><a href="/resources.html">Resources</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col footer-contact">
+        <h3>Contact</h3>
+        <ul class="contact-list">
+          <li><strong>Email:</strong> <a href="mailto:info@examteq.com">info@examteq.com</a></li>
+          <li><strong>WhatsApp:</strong> <a href="tel:+447404585113">+44 7404 585113</a></li>
+          <li><strong>Company number:</strong> 07404585113</li>
+          <li><strong>Location:</strong> London, United Kingdom</li>
+        </ul>
+        <div class="footer-legal-links">
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/cookies.html">Cookies</a>
+          <a href="/safeguarding.html">Safeguarding</a>
+        </div>
+      </div>
+    </div>
   </footer>
+
+  <!-- NAV + TABS JS -->
+  <script>
+    (function(){
+      const nav = document.getElementById('navLinks');
+      const ham = document.querySelector('.hamburger');
+      if (ham && nav) {
+        ham.addEventListener('click', () => {
+          const open = nav.classList.toggle('active');
+          ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+      document.querySelectorAll('#navLinks a').forEach(a => {
+        a.addEventListener('click', () => {
+          if (nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            ham && ham.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+      document.querySelectorAll('.has-submenu > .has-popup').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const isDesktop = window.matchMedia('(min-width: 861px)').matches;
+          if (isDesktop) return;
+          e.preventDefault();
+          const li = link.parentElement;
+          const open = li.classList.toggle('open');
+          link.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+    })();
+
+    const tabs = [
+      {btn:'#tab-teaching', panel:'#panel-teaching', key:'teaching'},
+      {btn:'#tab-paper',    panel:'#panel-paper',    key:'paper'},
+      {btn:'#tab-wait',     panel:'#panel-wait',     key:'waitlist'}
+    ];
+
+    function activateTabByKey(key){
+      tabs.forEach(t=>{
+        const btn=document.querySelector(t.btn);
+        const panel=document.querySelector(t.panel);
+        const active = t.key===key;
+        btn.setAttribute('aria-selected', active ? 'true' : 'false');
+        panel.classList.toggle('active', active);
+        if(active){
+          const first = panel.querySelector('input,select,textarea,button');
+          if(first){ try{ first.focus({preventScroll:true}); }catch(e){} }
+          window.scrollTo({ top: panel.offsetTop - 80, behavior:'auto' });
+        }
+      });
+    }
+    tabs.forEach(t=>{
+      document.querySelector(t.btn).addEventListener('click', ()=>activateTabByKey(t.key));
+    });
+
+    const params = new URLSearchParams(location.search);
+    const rawType = (params.get('type')||'').toLowerCase();
+    const cls  = (params.get('class') || params.get('classTitle') || '').toLowerCase();
+    const wait = (params.get('waitlist')||'').toLowerCase()==='true';
+
+    let type = 'teaching';
+    if (['teaching','paper','waitlist'].includes(rawType)) type = rawType;
+    else if (wait) type = 'waitlist';
+    else if (/\bpaper\s*class\b/i.test(cls)) type = 'paper';
+    activateTabByKey(type);
+
+    const day  = params.get('day')  || '';
+    const time = params.get('time') || '';
+    const title= params.get('class')|| '';
+
+    if(type==='teaching'){
+      if(day)  document.getElementById('t-day').value = day;
+      if(time) document.getElementById('t-time').value = time;
+      const b = document.getElementById('teaching-banner');
+      if (b){ b.textContent='Booking a Teaching Lesson'; b.style.display='block'; }
+    }
+
+    if(type==='paper'){
+      if(day)  document.getElementById('p-day').value = day;
+      document.getElementById('p-time').value = '5:00–7:00pm';
+      if(title) document.getElementById('paper-class-title').value = title;
+      const b = document.getElementById('paper-banner');
+      if (b){ b.textContent=`Booking Year 5 Paper Class: ${day||'Choose a day'} • 5–7pm`; b.style.display='block'; }
+
+      if(params.get('waitlist')==='true'){
+        activateTabByKey('waitlist');
+        if(day)  document.getElementById('w-day').value = day;
+        document.getElementById('w-time').value = '5:00–7:00pm';
+        const wb = document.getElementById('wait-banner');
+        if(wb){ wb.innerHTML = '<strong>Selected slot is full.</strong> Please join the waiting list.'; wb.style.display='block'; }
+      }
+    }
+
+    if(type==='waitlist'){
+      if(day)  document.getElementById('w-day').value = day;
+      document.getElementById('w-time').value = '5:00–7:00pm';
+      const wb = document.getElementById('wait-banner');
+      if (wb){ wb.textContent='Join the Waiting List for Year 5 Paper Class'; wb.style.display='block'; }
+    }
+  </script>
+
+  <!-- BOOKING: wire forms to Supabase Edge Function -->
+  <script>
+    // Your live function URL
+    const FN_URL = "https://kblzukxjorgdebwrwgzb.supabase.co/functions/v1/submit-booking";
+
+    function showBanner(containerId, text, kind = "success") {
+      const host = document.getElementById(containerId);
+      if (!host) return;
+      const box = document.createElement("div");
+      box.className = `notice ${kind === "error" ? "danger" : "success"}`;
+      box.textContent = text;
+      host.innerHTML = "";
+      host.appendChild(box);
+      host.style.display = "block";
+      host.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    function buttonBusy(btn, busy) {
+      if (!btn) return;
+      btn.disabled = !!busy;
+      btn.dataset._origText ??= btn.textContent;
+      btn.textContent = busy ? "Sending…" : btn.dataset._origText;
+    }
+    async function postBooking(payload) {
+      const res = await fetch(FN_URL, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.detail || err.error || "Request failed");
+      }
+      return res.json();
+    }
+
+    // Teaching form
+    (function bindTeaching(){
+      const form = document.getElementById("form-teaching");
+      if (!form) return;
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector("button[type=submit]");
+        buttonBusy(btn, true);
+        try {
+          const data = Object.fromEntries(new FormData(form).entries());
+          const payload = {
+            type: "teaching",
+            student_name: data.student?.trim(),
+            parent_name: data.parent?.trim(),
+            email: data.email?.trim(),
+            phone: data.phone?.trim(),
+            year_group: data.year || "",
+            preferred_slot: `${data.day || ""} ${data.time || ""}`.trim(),
+            notes: [data.notes, data.subject ? `Subject: ${data.subject}` : ""].filter(Boolean).join(" | ")
+          };
+          await postBooking(payload);
+          showBanner("teaching-banner", "Thanks! We’ve received your teaching lesson request. We’ve emailed a confirmation.");
+          form.reset();
+          form.querySelectorAll("select").forEach(s => s.value = "");
+        } catch (err) {
+          console.error(err);
+          showBanner("teaching-banner", "Sorry, something went wrong. Please try again or email info@examteq.com.", "error");
+        } finally {
+          buttonBusy(btn, false);
+        }
+      });
+    })();
+
+    // Paper class form
+    (function bindPaper(){
+      const form = document.getElementById("form-paper");
+      if (!form) return;
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector("button[type=submit]");
+        buttonBusy(btn, true);
+        try {
+          const data = Object.fromEntries(new FormData(form).entries());
+          const payload = {
+            type: "paper_class",
+            student_name: data.student?.trim(),
+            parent_name: data.parent?.trim(),
+            email: data.email?.trim(),
+            phone: data.phone?.trim(),
+            year_group: "Year 5",
+            preferred_slot: `${data.day || ""} ${data.time || ""}`.trim(),
+            notes: data.notes || ""
+          };
+          await postBooking(payload);
+          showBanner("paper-banner", "Thanks! Your Paper Class booking has been received. We’ve emailed a confirmation.");
+          form.reset();
+          form.querySelectorAll("select").forEach(s => s.value = "");
+        } catch (err) {
+          console.error(err);
+          showBanner("paper-banner", "Sorry, something went wrong. Please try again or email info@examteq.com.", "error");
+        } finally {
+          buttonBusy(btn, false);
+        }
+      });
+    })();
+
+    // Waiting list form
+    (function bindWait(){
+      const form = document.getElementById("form-wait");
+      if (!form) return;
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector("button[type=submit]");
+        buttonBusy(btn, true);
+        try {
+          const data = Object.fromEntries(new FormData(form).entries());
+          const payload = {
+            type: "waiting_list",
+            student_name: data.student?.trim(),
+            parent_name: data.parent?.trim(),
+            email: data.email?.trim(),
+            phone: data.phone?.trim(),
+            year_group: "Year 5",
+            preferred_slot: `${data.day || ""} ${data.time || ""}`.trim(),
+            notes: data.notes || ""
+          };
+          await postBooking(payload);
+          showBanner("wait-banner", "Thanks! You’ve been added to the waiting list. We’ll contact you when a space opens.");
+          form.reset();
+          form.querySelectorAll("select").forEach(s => s.value = "");
+        } catch (err) {
+          console.error(err);
+          showBanner("wait-banner", "Sorry, something went wrong. Please try again or email info@examteq.com.", "error");
+        } finally {
+          buttonBusy(btn, false);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

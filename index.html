@@ -1,172 +1,343 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="ExamTeq | Elite tutoring for 11+, KS2, and secondary school. Mock exams, topic tests, and free video lessons." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="ExamTeq | 11+ and KS2 tutoring that lifts scores and confidence. Weekly paper classes, English & Maths mastery, and mock exam preparation." />
   <title>ExamTeq | Strive for Success</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="favicon.ico" />
-</head>
-<body>
-  <!-- Navigation -->
- <header>
-  <nav class="navbar">
-    <div class="logo">
-      <a href="index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
-        <img src="logo.png" alt="ExamTeq Logo" style="height: 48px;">
-        <span style="font-weight: bold; font-size: 1.8rem; color: #0077cc;">ExamTeq</span>
-      </a>
-    </div>
 
-    <!-- Hamburger Icon -->
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="canonical" href="https://examteq.com/" />
 
-    <!-- Navigation Links -->
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="book.html">Book</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="mock-exams.html">Mock Exams</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="testimonials.html">Testimonials</a></li>
-      <li><a href="resources.html">Free Resources</a></li>
-      <li><a href="login.html">Login</a></li>
-      <li><a href="signup.html">Sign Up</a></li>
-      <li><a href="book.html" class="cta-button">Book a Trial</a></li>
-    </ul>
-  </nav>
-</header>
+  <!-- Social -->
+  <meta property="og:title" content="ExamTeq | Strive for Success" />
+  <meta property="og:description" content="11+ and KS2 tutoring: weekly paper classes, English & Maths mastery, and mock exam preparation." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://examteq.com/" />
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ExamTeq | Strive for Success" />
+  <meta name="twitter:description" content="11+ and KS2 tutoring: weekly paper classes, English & Maths mastery, and mock exam preparation." />
+  <meta name="twitter:image" content="/og-image.jpg" />
 
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Strive for Success with ExamTeq</h1>
-      <p>Expert-led tutoring for 11+, KS2, and GCSE. Mock exams, topic tests, and online video learning—designed for future-ready students.</p>
-      <div class="hero-buttons">
-        <a href="book.html" class="hero-cta">Book a Trial</a>
-        <a href="#services" class="hero-cta secondary">View Services</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Overview -->
-  <section id="services" class="services">
-    <h2>Our Core Programmes</h2>
-    <div class="service-grid">
-      <div class="service-card">
-        <h3>11+ Paper Class</h3>
-        <ul>
-          <li>Weekly timed papers</li>
-          <li>Grammar school prep</li>
-          <li>Live feedback</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <h3>English Mastery (KS2)</h3>
-        <ul>
-          <li>Comprehension & grammar</li>
-          <li>Creative writing support</li>
-          <li>11+ aligned curriculum</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <h3>Maths Mastery (KS2)</h3>
-        <ul>
-          <li>Mental maths & reasoning</li>
-          <li>Speed practice & tracking</li>
-          <li>Targeted Year 3–6 content</li>
-        </ul>
-      </div>
-    </div>
-    <div class="cta-link">
-      <a href="secondary.html" class="cta-button">See Secondary Programmes</a>
-    </div>
-  </section>
-
-  <!-- Topic Tests -->
-  <section class="highlight">
-    <h2>Topic Tests & Video Tutorials</h2>
-    <p>Purchase focused topic tests with smart-marking and get access to guided videos as a member. Build mastery, one skill at a time.</p>
-    <a href="topic-tests.html" class="cta-button">Explore Topic Tests</a>
-  </section>
-
-  <!-- Mock Exams -->
-  <section class="services">
-    <h2>Upcoming Mock Exams</h2>
-    <div class="service-grid">
-      <div class="service-card">
-        <h3>11+ Mock Paper 1</h3>
-        <p>August 3, 2025 – Online & In-Centre</p>
-      </div>
-      <div class="service-card">
-        <h3>11+ Mock Paper 2</h3>
-        <p>August 17, 2025 – Timed Conditions</p>
-      </div>
-      <div class="service-card">
-        <h3>KS2 Progress Test</h3>
-        <p>Book anytime – Marked with feedback</p>
-      </div>
-    </div>
-    <a href="mock-exams.html" class="cta-button">View All Mock Exams</a>
-  </section>
-
-  <!-- Free Resources -->
-  <section class="cta-strip">
-    <h2>Free Learning Resources</h2>
-    <p>Watch ExamTeq’s YouTube lessons and download revision sheets, all 100% free.</p>
-    <a href="resources.html" class="cta-button">Visit Resource Hub</a>
-  </section>
-
-  <footer>
-  <footer style="background: var(--footer-bg); color: var(--footer-text); font-size: 0.8rem;">
-  <div style="max-width: 1100px; margin: 0 auto; padding: 10px 15px 5px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;">
-
-    <div style="flex: 1; min-width: 180px;">
-      <h3 style="margin: 0 0 4px; font-size: 0.95rem; color: #fff;">About</h3>
-      <p style="margin: 0;">Premium tutoring since 2014 – helping students master exams through structured learning.</p>
-    </div>
-
-    <div style="flex: 1; min-width: 140px;">
-      <h3 style="margin: 0 0 4px; font-size: 0.95rem; color: #fff;">Links</h3>
-      <ul style="list-style: none; padding: 0; margin: 0;">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="book.html">Book</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="mock-exams.html">Mocks</a></li>
-        <li><a href="login.html">Login</a></li>
-      </ul>
-    </div>
-
-    <div style="flex: 1; min-width: 160px;">
-      <h3 style="margin: 0 0 4px; font-size: 0.95rem; color: #fff;">Contact</h3>
-      <p style="margin: 0;">info@examteq.com<br>+44 1234 567890<br>London, UK</p>
-    </div>
-
-  </div>
-
-  <div style="text-align: center; padding: 8px 0; background: #111; color: #aaa; font-size: 0.75rem;">
-    &copy; 2025 ExamTeq. All rights reserved.
-  </div>
-</footer>
-
-
-<script>
-  function toggleMenu() {
-    const nav = document.getElementById('navLinks');
-    nav.classList.toggle('active');
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "ExamTeq",
+    "url": "https://examteq.com/",
+    "logo": "https://examteq.com/logo.png",
+    "sameAs": ["https://www.youtube.com/@ExamTeq"],
+    "address": { "@type": "PostalAddress", "addressLocality": "London", "addressCountry": "GB" },
+    "contactPoint": [{ "@type": "ContactPoint", "contactType": "customer support", "email": "info@examteq.com" }]
   }
+  </script>
 
-  // Optional: Close menu after clicking a link
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        document.getElementById("navLinks").classList.remove("active");
+  <!-- Page-only layout tweaks (SCOPED so they don't change the header) -->
+  <style>
+    .home-page .page-container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+    .hero-inner { display:grid; grid-template-columns: 1.15fr .85fr; gap:2rem; align-items:center; }
+    @media (max-width:980px){ .hero-inner { grid-template-columns:1fr; } }
+    .hero-graphic { display:grid; place-items:center; }
+    .hero-graphic img { width:100%; max-width:420px; height:auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,.12)); }
+    .why-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    @media (max-width:900px){ .why-grid{ grid-template-columns:1fr; } }
+    .tick{display:flex; gap:.6rem; align-items:flex-start}
+    .tick i{width:22px;height:22px;border-radius:6px;background:#e8f7ee;color:#16a34a;display:grid;place-items:center;font-weight:800}
+    .testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    @media (max-width:900px){ .testi-grid{ grid-template-columns:1fr; } }
+    blockquote{ background:#fff; border:1px solid #e7ecf3; border-radius:14px; padding:1rem; box-shadow:0 8px 24px rgba(0,0,0,.05); margin:0; }
+    details{ background:#fff; border:1px solid #e7ecf3; border-radius:14px; padding:.9rem 1rem; }
+    details + details{ margin-top:.75rem; }
+    summary{ cursor:pointer; font-weight:700 }
+  </style>
+</head>
+
+<body class="home-page">
+  <!-- HEADER / NAV (IDENTICAL TO CONTACT) -->
+  <header>
+    <nav class="navbar container" aria-label="Primary">
+      <a class="logo" href="/index.html" aria-label="ExamTeq Home">
+        <img src="/logo.png" alt="ExamTeq logo" width="44" height="44" />
+        <span>ExamTeq</span>
+      </a>
+
+      <button class="hamburger" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">☰</button>
+
+      <ul class="nav-links" id="navLinks" role="menu">
+        <li role="none"><a role="menuitem" class="nav-link" href="/index.html" aria-current="page">Home</a></li>
+        <li role="none"><a role="menuitem" class="nav-link" href="/mock-exams.html">Paper Class</a></li>
+
+        <li class="has-submenu" role="none">
+          <a role="menuitem" class="nav-link has-popup" href="/resources.html" aria-haspopup="true" aria-expanded="false">Resources</a>
+          <ul class="submenu" role="menu" aria-label="Resources submenu">
+            <li role="none"><a role="menuitem" href="/resources.html#videos">Online Lessons</a></li>
+            <li role="none"><a role="menuitem" href="/resources.html#downloads">Topic Tests</a></li>
+            <li role="none"><a role="menuitem" href="/timestable.html">Times Tables Practice</a></li>
+            <li role="none"><a role="menuitem" href="/advanced-arithmetic.html">Advanced Arithmetic Practice</a></li>
+          </ul>
+        </li>
+
+        <li role="none"><a role="menuitem" class="nav-link" href="/contact.html">Contact</a></li>
+        <li role="none"><a role="menuitem" class="nav-link" href="/login.html">Login</a></li>
+        <li role="none"><a role="menuitem" class="cta-button nav-cta" href="/book.html">Book a Session</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="page-container hero-inner">
+      <div>
+        <h1><strong>Strive for Success with ExamTeq</strong></h1>
+        <p>Weekly 11+ paper classes and targeted English & Maths mastery for Years 3–6. Smart practice, clear feedback, and steady progress towards grammar-school success.</p>
+        <div class="hero-buttons">
+          <a href="/book.html" class="hero-cta cta-button">Book a Session</a>
+          <a href="#programmes" class="hero-cta secondary">Explore Programmes</a>
+        </div>
+      </div>
+      <div class="hero-graphic" aria-hidden="true">
+        <img src="/logo.png" alt="" />
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+    <!-- PROGRAMMES -->
+    <section id="programmes" class="section">
+      <div class="page-container">
+        <h2 class="section-title">Our Core Programmes</h2>
+        <div class="service-grid">
+          <article class="service-card">
+            <h3>11+ Paper Class (Year 5)</h3>
+            <ul>
+              <li>Weekly timed papers in exam conditions</li>
+              <li>Live marking and feedback for Maths and English</li>
+              <li>Grammar school exam preparation</li>
+            </ul>
+            <p style="margin-top:.5rem;"><a href="/book.html?class=Year%205%20Paper%20Class&day=Wednesday&time=17%3A00-19%3A00" class="cta-button">Book Now</a></p>
+          </article>
+          <article class="service-card">
+            <h3>English Teaching Class (KS2)</h3>
+            <ul>
+              <li>Weekly spelling & similar meaning test</li>
+              <li>Comprehension and creative writing explanation and test</li>
+              <li>Grammar and punctuation mastery</li>
+            </ul>
+            <p style="margin-top:.5rem;"><a href="/book.html?subject=KS2%20English%20Mastery" class="cta-button">Book a Session</a></p>
+          </article>
+          <article class="service-card">
+            <h3>Maths Teaching Class (KS2)</h3>
+            <ul>
+              <li>Weekly arithmetic test with explanation</li>
+              <li>End of term exam covering all topics</li>
+              <li>Problem-solving, reasoning and arithmetic fluency</li>
+            </ul>
+            <p style="margin-top:.5rem;"><a href="/book.html?subject=KS2%20Maths%20Mastery" class="cta-button">Book a Session</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMES TABLES PROMO -->
+    <section class="section">
+      <div class="page-container">
+        <h2 class="section-title">Free Times Tables and Arithmetic Practice</h2>
+        <div class="service-grid">
+          <article class="service-card">
+            <h3>Times Tables Practice Questions</h3>
+            <ul>
+              <li>Answer times table questions using fill-in or multiple choice mode</li>
+              <li>Instant answers and progress tracking</li>
+              <li>Achieve above 80% to earn certificate</li>
+            </ul>
+            <p style="margin-top:.5rem;"><a class="cta-button" href="/timestable.html">Start practising</a></p>
+          </article>
+          <article class="service-card">
+            <h3>Flash Cards Times Table</h3>
+            <ul>
+              <li>Memorise times table using flash card method</li>
+              <li>Increase speed to answer rapidly</li>
+              <li>Shuffle order to test yourself</li>
+            </ul>
+            <p style="margin-top:.5rem;"><a class="cta-button" href="/flashcards.html">Start memorising</a></p>
+          </article>
+          <article class="service-card">
+            <h3>Advanced Mathematics</h3>
+            <ul>
+              <li>Practice higher level arithmetic</li>
+              <li>Includes 4 operations and BODMAS</li>
+              <li>Timed test + certificate for ≥80%</li>
+            </ul>
+            <p style="margin-top:.5rem;"><a class="cta-button" href="/advanced-arithmetic.html">Start practising</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FREE ONLINE LESSONS -->
+    <section id="free-lessons" class="section highlight">
+      <div class="page-container" style="padding: 1.25rem 0;">
+        <h2 class="section-title">Free Online Lessons (YouTube)</h2>
+        <p style="text-align:center; max-width:70ch; margin: 0 auto 1rem;">
+          We publish free lessons and study tips on our YouTube channel. New videos are posted by
+          <strong>info@examteq.com</strong> at <a href="https://www.youtube.com/@ExamTeq" target="_blank" rel="noopener">@ExamTeq</a>.
+        </p>
+        <div class="service-grid" style="margin-top:1rem;">
+          <article class="service-card">
+            <h3>11+ Reading Comprehension</h3>
+            <p class="muted">Inference methods, question stems, and model answers.</p>
+            <p style="margin-top:.5rem;"><a class="cta-button" href="https://www.youtube.com/@ExamTeq" target="_blank" rel="noopener">Watch on YouTube</a></p>
+          </article>
+          <article class="service-card">
+            <h3>KS2 Maths Reasoning</h3>
+            <p class="muted">Non-routine problems and step-by-step solutions.</p>
+            <p style="margin-top:.5rem;"><a class="cta-button" href="https://www.youtube.com/@ExamTeq" target="_blank" rel="noopener">Watch on YouTube</a></p>
+          </article>
+          <article class="service-card">
+            <h3>Exam Skills & Timing</h3>
+            <p class="muted">Pacing strategies, checking, and avoiding common traps.</p>
+            <p style="margin-top:.5rem;"><a class="cta-button" href="https://www.youtube.com/@ExamTeq" target="_blank" rel="noopener">Watch on YouTube</a></p>
+          </article>
+        </div>
+        <p style="text-align:center; margin-top:1rem;">
+          <a class="cta-button" href="https://www.youtube.com/@ExamTeq" target="_blank" rel="noopener">Visit the Channel</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="page-container">
+        <h2 class="section-title">Frequently asked questions</h2>
+        <div class="page-container" style="max-width:780px; padding:0">
+          <details open>
+            <summary>Where are sessions held?</summary>
+            <p class="muted">We run in-centre sessions locally.</p>
+          </details>
+          <details>
+            <summary>What year groups do you teach?</summary>
+            <p class="muted">Years 3–6 for English & Maths mastery, plus our weekly 11+ paper classes for grammar-school preparation.</p>
+          </details>
+          <details>
+            <summary>How do I get started?</summary>
+            <p class="muted">Click “Book a Session”, tell us about your child, and we’ll match you to the right group and lesson.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA STRIP -->
+    <section class="page-container" style="padding: 2rem 0;">
+      <div class="cta-strip">
+        <h2>Ready to get started?</h2>
+        <p>Book a session and we’ll share a simple plan to help your child progress every week.</p>
+        <p style="margin-top:.5rem;"><a href="/book.html" class="cta-button">Book a Trial</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER (same as your other pages, with social icons) -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <!-- Brand / About -->
+      <div class="footer-col">
+        <a class="footer-logo" href="/index.html" aria-label="ExamTeq Home"><span>ExamTeq</span></a>
+        <p class="footer-blurb">
+          Premium tutoring since 2014 — structured English, Maths, and 11+ preparation with clear feedback and steady progress.
+        </p>
+        <div class="footer-social">
+          <a class="ig" href="https://www.instagram.com/examteq" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.35 3.608 1.325.975.975 1.262 2.242 1.324 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.35 2.633-1.325 3.608-.975.975-2.242 1.262-3.608 1.324-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.35-3.608-1.325-.975-.975-1.262-2.242-1.324-3.608C2.175 15.747 2.163 15.367 2.163 12s.012-3.584.07-4.85c.062-1.366.35-2.633 1.325-3.608C4.533 2.567 5.8 2.28 7.166 2.218 8.432 2.16 8.812 2.163 12 2.163zm0 3.675a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm7.2-1.358a1.44 1.44 0 1 0 0 2.882 1.44 1.44 0 0 0 0-2.882z"/></svg>
+          </a>
+          <a class="yt" href="https://www.youtube.com/@ExamTeq" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.001 3.001 0 0 0-2.112-2.12C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.386.566a3 3 0 0 0-2.112 2.12C0 8.083 0 12 0 12s0 3.917 .502 5.814a3 3 0 0 0 2.112 2.12C4.5 20.5 12 20.5 12 20.5s7.5 0 9.386-.566a3 3 0 0 0 2.112-2.12C24 15.917 24 12 24 12s0-3.917-.502-5.814zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          </a>
+          <a class="fb" href="https://www.facebook.com/examteq" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.675 0h-21.35C.596 0 0 .596 0 1.326v21.348C0 23.404.596 24 1.326 24h11.495v-9.294H9.691V11.41h3.13V8.708c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.764v2.314h3.587l-.467 3.296h-3.12V24h6.116C23.404 24 24 23.404 24 22.674V1.326C24 .596 23.404 0 22.675 0z"/></svg>
+          </a>
+          <a class="wa" href="https://wa.me/447404585113" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12.04 2a9.96 9.96 0 0 0-8.51 15.2L2 22l4.93-1.47A9.96 9.96 0 1 0 12.04 2zm5.88 15.03c-.24.69-1.2 1.27-1.98 1.44-.53.11-1.22.2-3.56-.74-2.99-1.24-4.92-4.29-5.07-4.49-.15-.2-1.21-1.61-1.21-3.07 0-1.46.77-2.17 1.04-2.47.24-.27.64-.39 1.03-.39.12 0 .23 0 .33.01.29.01.44.03.63.49.24.58.83 2 .9 2.15.07.15.12.32.02.52-.1.2-.15.31-.3.48-.15.17-.31.39-.44.53-.14.14-.28.3-.12.58.15.27.66 1.08 1.41 1.75.97.86 1.79 1.13 2.06 1.26.27.13.43.11.59-.06.16-.17.68-.79.86-1.06.18-.27.36-.22.61-.13.25.09 1.6.75 1.88.88.28.13.46.2.53.31.07.12.07.69-.17 1.38z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <nav class="footer-col footer-links" aria-label="Footer">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/book.html">Book a Trial</a></li>
+          <li><a href="/mock-exams.html">Paper Class</a></li>
+          <li><a href="/resources.html">Resources</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Contact / Legal -->
+      <div class="footer-col footer-contact">
+        <h3>Contact</h3>
+        <ul class="contact-list">
+          <li><strong>Email:</strong> <a href="mailto:info@examteq.com">info@examteq.com</a></li>
+          <li><strong>WhatsApp:</strong> <a href="tel:+447404585113">+44 7404 585113</a></li>
+          <li><strong>Company number:</strong> 07404585113</li>
+          <li><strong>Location:</strong> London, United Kingdom</li>
+        </ul>
+        <div class="footer-legal-links">
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+          <a href="/cookies.html">Cookies</a>
+          <a href="/safeguarding.html">Safeguarding</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© <span id="year"></span> ExamTeq. All rights reserved.</span>
+        <span>Helping students succeed since 2014.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Same nav JS as contact/resources -->
+  <script>
+    (function(){
+      var y=document.getElementById('year'); if(y) y.textContent=(new Date()).getFullYear();
+
+      const nav = document.getElementById('navLinks');
+      const ham = document.querySelector('.hamburger');
+      if (ham && nav) {
+        ham.addEventListener('click', () => {
+          const open = nav.classList.toggle('active');
+          ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+      // Close on link click (mobile)
+      document.querySelectorAll('#navLinks a').forEach(a => {
+        a.addEventListener('click', () => {
+          if (nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            ham && ham.setAttribute('aria-expanded', 'false');
+          }
+        });
       });
-    });
-  });
-</script>
-
+      // Mobile submenu tap
+      document.querySelectorAll('.has-submenu > .has-popup').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const isDesktop = window.matchMedia('(min-width: 861px)').matches;
+          if (isDesktop) return;
+          e.preventDefault();
+          const li = link.parentElement;
+          const open = li.classList.toggle('open');
+          link.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

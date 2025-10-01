@@ -5,65 +5,139 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="ExamTeq member dashboard for exclusive access to topic tests and video tutorials." />
   <title>Member Dashboard | ExamTeq</title>
-  <link rel="stylesheet" href="styles.css" />
 
-  <!-- Firebase Auth Check -->
+  <link rel="stylesheet" href="/styles.css" />
+
+  <style>
+    .dashboard { max-width: 1000px; margin: 0 auto; padding: 2rem 1rem; }
+    .gate { text-align:center; padding: 3rem 1rem; color:#0b1e44; }
+    .muted { opacity:.85; }
+    .grid { display:grid; gap:1rem; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 820px){ .grid { grid-template-columns: 1fr; } }
+    .card { background:#fff; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.06); padding: 1.25rem; }
+    .cta-row { display:flex; gap:.6rem; flex-wrap:wrap; margin-top:1rem; }
+    .cta-button { background:#0b1e44; color:#fff; border:none; padding:.7rem 1rem; border-radius:10px; font-weight:700; cursor:pointer; }
+    .notice { background:#eef6ff; border:1px solid #d8e7ff; color:#0b1e44; border-radius:12px; padding:.8rem 1rem; }
+  </style>
+
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCb7OZqJ6eLJYgX8j9Ya6x5oTXKX-opBvE",
-      authDomain: "examteq-bd7d4.firebaseapp.com",
-      projectId: "examteq-bd7d4",
-      storageBucket: "examteq-bd7d4.firebasestorage.app",
-      messagingSenderId: "577261003258",
-      appId: "1:577261003258:web:1e8c276833b974a9b24443"
-    };
+    const SUPABASE_URL = "https://kblzukxjorgdebwrwgzb.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtibHp1a3hqb3JnZGVid3J3Z3piIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg0NDk0NzEsImV4cCI6MjA3NDAyNTQ3MX0.wZGDtJCIzSEJREkqeIkoAvCN81XeMFOmEJ3LrJaaLi8";
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "login.html";
+    const gate      = document.getElementById("gate");
+    const content   = document.getElementById("content");
+    const userEmail = document.getElementById("userEmail");
+
+    async function guard() {
+      gate.style.display = "block";
+      content.style.display = "none";
+
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session) {
+        location.href = "/login.html";
+        return;
       }
-    });
+
+      const user = session.user;
+      if (!user.email_confirmed_at) {
+        gate.innerHTML = `
+          <h2>Email verification required</h2>
+          <p class="muted">Please click the confirmation link we sent to <b>${user.email}</b>.</p>
+          <div class="cta-row">
+            <button id="resend" class="cta-button">Resend confirmation</button>
+            <button id="logoutBtn1" class="cta-button" style="background:#6b7280">Logout</button>
+          </div>
+        `;
+        document.getElementById("resend")?.addEventListener("click", async () => {
+          const { error } = await supabase.auth.resend({ type: "signup", email: user.email });
+          if (error) alert(error.message);
+          else alert("Confirmation email sent. Please check your inbox (and spam).");
+        });
+        document.getElementById("logoutBtn1")?.addEventListener("click", logout);
+        return;
+      }
+
+      userEmail.textContent = user.email ?? "";
+      gate.style.display = "none";
+      content.style.display = "block";
+    }
+
+    supabase.auth.onAuthStateChange(() => { guard(); });
 
     window.logout = async () => {
-      await signOut(auth);
-      window.location.href = "login.html";
+      await supabase.auth.signOut();
+      location.href = "/login.html";
     };
+
+    window.addEventListener("DOMContentLoaded", guard);
   </script>
 </head>
 <body>
   <header>
-    <!-- Your navbar -->
+    <nav class="navbar container" aria-label="Primary">
+      <a class="logo" href="/index.html" aria-label="ExamTeq Home">
+        <img src="/logo.png" alt="ExamTeq logo" width="44" height="44" />
+        <span>ExamTeq</span>
+      </a>
+      <ul class="nav-links" role="menu">
+        <li role="none"><a role="menuitem" class="nav-link" href="/index.html">Home</a></li>
+        <li role="none"><a role="menuitem" class="nav-link" href="/book.html">Book</a></li>
+        <li role="none"><a role="menuitem" class="nav-link" href="/resources.html">Resources</a></li>
+        <li role="none"><button role="menuitem" class="cta-button" onclick="logout()">Logout</button></li>
+      </ul>
+    </nav>
   </header>
 
-  <main class="form-section">
-    <h1>Welcome to ExamTeq Member Dashboard</h1>
-    <p>You're logged in! Access your exclusive resources below.</p>
+  <section id="gate" class="gate">
+    <h2>Loading your dashboard…</h2>
+    <p class="muted">One moment while we check your session.</p>
+  </section>
 
-    <h3>📄 Topic Tests</h3>
-    <ul style="list-style: none; padding-left: 0;">
-      <li><a href="/downloads/english-test-1.pdf" class="cta-button" download>Download English Test</a></li>
-      <li><a href="/downloads/maths-test-1.pdf" class="cta-button" download>Download Maths Test</a></li>
-    </ul>
+  <main id="content" class="dashboard" style="display:none;">
+    <h1>Welcome to your Member Dashboard</h1>
+    <p class="muted">Signed in as <b id="userEmail"></b>.</p>
 
-    <h3>🎥 Tutorial Videos</h3>
-    <div class="service-grid">
-      <div class="service-card">
-        <h4>11+ Reading Comprehension Strategy</h4>
-        <iframe width="100%" height="200" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
-      </div>
+    <div class="grid" style="margin-top:1rem;">
+      <section class="card">
+        <h3>📄 Topic Tests</h3>
+        <p class="muted">Downloadable PDFs for members.</p>
+        <div class="cta-row">
+          <a href="/downloads/english-test-1.pdf" class="cta-button" download>English Test</a>
+          <a href="/downloads/maths-test-1.pdf"   class="cta-button" download>Maths Test</a>
+        </div>
+        <p class="muted" style="margin-top:.6rem;">
+          Tip: for stronger protection, serve these files behind an authenticated endpoint
+          (static links can be shared). I can set that up if you want.
+        </p>
+      </section>
+
+      <section class="card">
+        <h3>🎥 Tutorial Videos</h3>
+        <p class="muted">Curated lessons for 11+ prep.</p>
+        <div class="service-grid">
+          <div class="service-card" style="margin-top:.6rem;">
+            <h4>11+ Reading Comprehension Strategy</h4>
+            <iframe width="100%" height="220"
+              src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+              title="11+ Reading Strategy"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <button onclick="logout()" class="cta-button" style="margin-top: 2rem;">Logout</button>
+    <div class="cta-row" style="margin-top:2rem;">
+      <button onclick="logout()" class="cta-button">Logout</button>
+    </div>
   </main>
 
-  <footer>
-    <!-- Your footer here -->
+  <footer class="container" style="padding:2rem 1rem;">
+    <p class="muted">© ExamTeq</p>
   </footer>
 </body>
 </html>

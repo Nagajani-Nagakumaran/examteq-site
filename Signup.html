@@ -3,69 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Create an ExamTeq account to access topic tests and video tutorials." />
+  <meta name="description" content="Create an ExamTeq account to access topic tests and mock exams." />
   <title>Sign Up | ExamTeq</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .form-section { max-width: 520px; margin: 0 auto; padding: 2rem 1rem; }
+    .cta-button { background:#0b1e44; color:#fff; border:none; padding:.7rem 1rem; border-radius:10px; font-weight:700; cursor:pointer; }
+    .muted{opacity:.85}
+  </style>
 
-  <!-- Firebase SDK -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCb7OZqJ6eLJYgX8j9Ya6x5oTXKX-opBvE",
-      authDomain: "examteq-bd7d4.firebaseapp.com",
-      projectId: "examteq-bd7d4",
-      storageBucket: "examteq-bd7d4.firebasestorage.app",
-      messagingSenderId: "577261003258",
-      appId: "1:577261003258:web:1e8c276833b974a9b24443"
-    };
+    const SUPABASE_URL = "https://kblzukxjorgdebwrwgzb.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtibHp1a3hqb3JnZGVid3J3Z3piIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg0NDk0NzEsImV4cCI6MjA3NDAyNTQ3MX0.wZGDtJCIzSEJREkqeIkoAvCN81XeMFOmEJ3LrJaaLi8";
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     window.signUp = async (e) => {
       e.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const errorDiv = document.getElementById('error');
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const errorDiv = document.getElementById("error");
+      const okDiv = document.getElementById("ok");
 
-      try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        window.location.href = 'members.html';
-      } catch (err) {
-        errorDiv.textContent = err.message;
+      errorDiv.textContent = "";
+      okDiv.textContent = "";
+
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          // After confirming, send them back to your site
+          emailRedirectTo: "https://examteq.com/members.html"
+        }
+      });
+
+      if (error) {
+        errorDiv.textContent = error.message;
+        return;
       }
+
+      okDiv.textContent = "Check your inbox for a verification link from info@examteq.com.";
+      document.querySelector("button[type=submit]").disabled = true;
     };
   </script>
 </head>
 <body>
-  <header>
-    <!-- Reuse your navbar here -->
-  </header>
-
   <main class="form-section">
     <h1>Create an Account</h1>
-    <p>Gain exclusive access to topic tests, video tutorials, and more.</p>
+    <p class="muted">Verify your email to access members-only topic tests.</p>
+
     <form onsubmit="signUp(event)">
       <label for="email">Email</label>
       <input type="email" id="email" required />
 
-      <label for="password">Password</label>
-      <input type="password" id="password" required />
+      <label for="password" style="margin-top:.5rem;">Password</label>
+      <input type="password" id="password" minlength="8" required />
 
-      <div id="error" style="color: red; font-size: 0.9rem;"></div>
+      <div id="error" style="color:#b91c1c;margin:.5rem 0;"></div>
+      <div id="ok" style="color:#047857;margin:.5rem 0;"></div>
 
       <button type="submit" class="cta-button">Sign Up</button>
     </form>
 
-    <p style="margin-top: 1rem; text-align: center;">
-      Already have an account? <a href="login.html">Log In</a>
+    <p style="margin-top:1rem;text-align:center;">
+      Already have an account? <a href="/login.html">Log in</a>
     </p>
   </main>
-
-  <footer>
-    <!-- Use your compact footer HTML here -->
-  </footer>
 </body>
 </html>

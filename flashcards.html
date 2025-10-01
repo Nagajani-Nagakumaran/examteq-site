@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ExamTeq • Times Tables Flash Cards</title>
+
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+
+  <!-- You can reuse timestable.css. If you prefer a lighter page, add the small flashcards.css below too -->
+  <link rel="stylesheet" href="timestable.css" />
+  <link rel="stylesheet" href="flashcards.css" />
+</head>
+<body>
+  <header class="hdr">
+    <div class="wrap hdr-inner">
+      <h1 class="logo">🃏 ExamTeq • Flash Cards</h1>
+      <a class="back" href="timestable.html">← Back to Practice</a>
+    </div>
+  </header>
+
+  <main class="wrap grid">
+    <section class="panel">
+      <h2>Setup</h2>
+      <div class="box">
+        <div class="label">Tables</div>
+        <div id="tables" class="tables"></div>
+        <div class="mini-actions">
+          <button id="all" class="chip-ghost" type="button">Select all</button>
+          <button id="none" class="chip-ghost" type="button">Clear</button>
+          <button id="evens" class="chip-ghost" type="button">Evens</button>
+          <button id="odds" class="chip-ghost" type="button">Odds</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="box">
+          <div class="label">Type</div>
+          <div class="pills">
+            <input type="radio" name="op" id="op-mul" value="mul"><label for="op-mul">Multiplication (×)</label>
+            <input type="radio" name="op" id="op-div" value="div"><label for="op-div">Division (÷)</label>
+            <input type="radio" name="op" id="op-mix" value="mix" checked><label for="op-mix">Mixed</label>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="label">Order</div>
+          <div class="pills">
+            <input type="radio" name="order" id="o-seq" value="sequential" checked><label for="o-seq">In order</label>
+            <input type="radio" name="order" id="o-rand" value="random"><label for="o-rand">Random</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="startbar">
+        <span class="tip">Click the card to flip. Use ← → keys to move.</span>
+        <div class="btns">
+          <button id="restart" class="btn-ghost" type="button">Rebuild</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Flash Card</h2>
+
+      <div id="card" class="fc-card" aria-live="polite" title="Click to flip">
+        <div id="fc-text" class="q">2 × 3 = ?</div>
+      </div>
+
+      <div class="row-actions">
+        <button id="prev" class="btn-ghost" type="button">Prev</button>
+        <button id="next" class="btn-ghost" type="button">Next</button>
+        <button id="shuffle" class="btn-ghost" type="button">Shuffle</button>
+      </div>
+
+      <div id="meta" class="fc-meta"></div>
+      <div id="msg" class="feedback"></div>
+    </section>
+  </main>
+
+  <footer class="ftr">© <span id="yr"></span> ExamTeq • Flash Cards</footer>
+
+  <script src="flashcards.js" defer></script>
+</body>
+</html>
