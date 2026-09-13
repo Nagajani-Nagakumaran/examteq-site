@@ -31,8 +31,6 @@ to practise outside lessons.
 
 <img width="613" height="394" alt="image" src="https://github.com/user-attachments/assets/45947b55-b76f-46ca-8c97-2852bc80c326" />
 
-<img width="410" height="410" alt="image" src="https://github.com/user-attachments/assets/61608c7b-4e7f-43ed-ad55-fd3ac3b11405" />
-
 ## 🚀 Live Site
 
 [Visit ExamTeq →](https://examteq.com/)
