@@ -1,4 +1,4 @@
-<img width="833" height="437" alt="image" src="https://github.com/user-attachments/assets/9ea4ac74-e031-42a9-9771-d74a0f27520a" /># ExamTeq
+
 
 Educational web platform developed for 11+ preparation, with interactive learning resources and online practice materials.
 
@@ -23,6 +23,15 @@ user interface and interactive learning functionality.
 The project was built to support digital delivery of ExamTeq's
 educational resources and provide students with an accessible way
 to practise outside lessons.
+
+## 📸 Preview
+
+<!-- Add 1–3 screenshots here -->
+<img width="740" height="417" alt="image" src="https://github.com/user-attachments/assets/87716eca-362d-4b52-a4dd-41599e2bb531" />
+
+<img width="613" height="394" alt="image" src="https://github.com/user-attachments/assets/45947b55-b76f-46ca-8c97-2852bc80c326" />
+
+<img width="410" height="410" alt="image" src="https://github.com/user-attachments/assets/61608c7b-4e7f-43ed-ad55-fd3ac3b11405" />
 
 ## 🚀 Live Site
 
