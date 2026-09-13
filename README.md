@@ -24,23 +24,8 @@ The project was built to support digital delivery of ExamTeq's
 educational resources and provide students with an accessible way
 to practise outside lessons.
 
-## 📸 Preview
-
-<!-- Add 1–3 screenshots here -->
-
-![ExamTeq homepage](<img width="940" height="493" alt="image" src="https://github.com/user-attachments/assets/9488b5cc-6ad6-4ba4-abc8-a1fd81c5e942" />
-)
-
 ## 🚀 Live Site
 
 [Visit ExamTeq →](https://examteq.com/)
 
-## 📂 Repository Structure
 
-```text
-examteq-site/
-├── index.html
-├── css/
-├── js/
-├── images/
-└── README.md
